@@ -21,25 +21,33 @@
         <video>video player</video>
         <div id="danmaku_container">
         </div>
-        <div id="attention">
+        <div id="attention_box">
             <img id="attention" src="img/">
         </div>
     </div>
     <div class="navigation">
         <div class="horizontal" id="bottom">
-            <label for="show">显示弹幕</label>
-            <input type="image" class="yes" name="show" id="show">
-            <label for="color">选择你的弹幕颜色</label>
-            <select name="color"></select>
+            <div class="setting">
+            <label id="label1"for="show">开关</label>
+            <input type="image" name="show" id="show" alt="on/off">
+            <label for="color">颜色</label>
+            <select name="color" id="color"></select>        
+            <label for="size">大小</label>
+            <select name="size" id="size"></select>        
+            <label for="opacity">透明度</label>
+            <select name="opacity" id="opacity"></select>
+            </div>
+            <div id="textbox">
             <label>加入讨论</label>
             <input type="text" id="user" placeholder="用户名">
             <input type="text" id="words"  placeholder="发送一条弹幕">
             <input type="image" id="send_btn" alt="发送">
             <input type="image" id="freshen_btn" alt="刷新">
+            </div>
         </div>
     </div>
 </body>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/core.js" defer async="true"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 </html>

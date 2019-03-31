@@ -15,10 +15,26 @@
     height: -webkit-fill-available;
     margin: 0%;
 }
+#danmaku_box{
+    float: right;
+}
 video{
     background-color: black;
 }
 #quit_btn{
     position: absolute;
     right: 0%;
+}
+#size{
+    width: 53px;
+}
+#opacity{
+    width: 30px;
+}
+#textbox,.setting{
+    text-align: center;
+    color: dimgray;
+}
+#user{
+    width: 45px;
 }
