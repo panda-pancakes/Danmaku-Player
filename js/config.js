@@ -8,7 +8,7 @@ $(function (){
     var ws_url="ws://localhost:8080"
     function setstyle(){
         color[0]="red";
-        color[1]="orane";
+        color[1]="orane";          //orange?
         color[2]="green";
         color[3]="blue";
         display[0]="1";
