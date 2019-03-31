@@ -1,0 +1,16 @@
+.navigation{
+    background-color: whitesmoke;
+    max-height: 10%;
+}
+#top{
+    top: 0%;
+}
+#bottom{
+    bottom: 0%;
+}
+#main_container{
+    background-color: black;
+    max-width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    margin: 0%;
+}

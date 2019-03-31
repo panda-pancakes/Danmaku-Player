@@ -8,8 +8,32 @@
     minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <meta name="description" content="弹幕练习">
     <meta name="description" content="弹幕练习">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css">
 </head>
 <body>
-
+    <div class="navigation">
+        <div class="horizontal" id="top">
+            <label id="video_name">视频名称</label>
+            <input type="image" id="quit_btn" alt="x">
+        </div>
+    </div>
+    <div id="main_container">
+        <!-- <video>video player</video> -->
+        <div id="danmaku_container">
+        </div>
+    </div>
+    <div class="navigation">
+        <div class="horizontal" id="bottom">
+            <label for="show">显示弹幕</label>
+            <input type="image" class="yes" name="show">
+            <label for="color">选择你的弹幕颜色</label>
+            <select name="color"></select>
+            <label>加入讨论</label>
+            <input type="text"  placeholder="发送一条弹幕">
+            <input type="image" id="send_btn" alt="发送">
+            <input type="image" id="freshen_btn" alt="刷新">
+        </div>
+    </div>
 </body>
+<script src="js/main.js"></script>
 </html>
