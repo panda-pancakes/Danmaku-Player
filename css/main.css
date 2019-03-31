@@ -18,3 +18,7 @@
 video{
     background-color: black;
 }
+#quit_btn{
+    position: absolute;
+    right: 0%;
+}
