@@ -5,7 +5,7 @@ $(function (){
     var color=Array();
     var display=Array();
     var size=Array();
-    var ws_url="ws://localhost:8080"
+    var ws_url="ws://http://203.195.221.189/Danmaku-Player/php"
     function setstyle(){
         color[0]="red";
         color[1]="orane";
