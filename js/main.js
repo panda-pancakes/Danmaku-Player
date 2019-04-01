@@ -21,6 +21,7 @@ $(function(){
             //发送弹幕
             ws.onmessage=function(evt){
                 data=evt.data;
+                show_bullet(data);
             }
             //收集服务器上的弹幕
             ws.onclose=function(){
@@ -107,5 +108,12 @@ $(function(){
             "font-size":size,
             "opacity":opacity
         })
+    }
+    function show_bullet(data){
+        for(var i=0;i<data.sum;i++){
+            $("#danmaku_container").append("<div class='bullet'"+"id=bullet["+num+"]>" + data.text + "</div>");
+            bulletname="#bulletc["+num+"]";
+            font_style(bulletname);
+        }
     }
 })

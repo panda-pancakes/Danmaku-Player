@@ -8,7 +8,7 @@ $(function (){
     var ws_url="ws://http://203.195.221.189/Danmaku-Player/php"
     function setstyle(){
         color[0]="red";
-        color[1]="orane";
+        color[1]="orane";          //orange?
         color[2]="green";
         color[3]="blue";
         display[0]="1";
