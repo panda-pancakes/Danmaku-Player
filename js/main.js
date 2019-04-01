@@ -51,7 +51,12 @@
     function texting(str){
         $(str).css({
             "margin-bottom":"200px"
-        })
+        });
+        setTimeout(function(){
+            $(str).css({
+                "margin-bottom":"unset"
+            });
+            },2333);
     }
     //显示提示
     function attention(){
