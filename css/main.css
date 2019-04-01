@@ -58,3 +58,41 @@ label{
     font-family: "微软雅黑";
     font-size: 11px;
 }
+input[type="button"]{
+    -webkit-appearance: button-bevel;
+    border-radius: 1em;
+    text-align: center;
+    font-family: "微软雅黑";
+    color: darkslategray;
+    font-size: 12px;
+}
+.bullet{
+    background: none;
+    position: absolute;
+    top: 33px;
+    color: white;
+    font-size: 25px;
+    animation: flying 8s;
+    animation-timing-function:ease-in;
+    -webkit-animation: flying 8s;
+    -webkit-animation-timing-function:ease-in;
+    animation-fill-mode: forwards;
+}
+@keyframes flying{
+    from{
+        right: 15px;
+    }
+    to{
+        right: 355px;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes flying{
+    from{
+        right: 15px;
+    }
+    to{
+        right: 355px;
+        opacity: 0;
+    }
+}

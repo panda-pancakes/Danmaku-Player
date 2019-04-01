@@ -1,4 +1,4 @@
-$(function(){
+// $(function(){
     var user=$("#user").val();
     var words=$("#words").val();
     var data;
@@ -47,6 +47,10 @@ $(function(){
         })
         attention();
     }
+    //滚动条 让输入框不要被挡着
+    function texting(str){
+        $(str).scrollTop(200);
+    }
     //显示提示
     function attention(){
         $("#attention").attr("src","img/");
@@ -67,14 +71,14 @@ $(function(){
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
             $("#user").focus(function(){
-                $("#user").scrollIntoViewIfNeeded()
+                texting("#user");
             });
             errcode=233;
             attention();
         }
         if(check_uni($("#user").val())){
             $("#user").focus(function(){
-                $("#user").scrollIntoViewIfNeeded()
+                texting("#user");
             });
             errcode=666;
             attention();
@@ -82,14 +86,13 @@ $(function(){
         if(isBlank($("#words").val())){
             errcode=233;
             $("#words").focus(function(){
-                $("#words").scrollIntoViewIfNeeded()
+                texting("#words");
             });
             attention();
         }
         if(check_uni($("#words").val())){
             errcode=666;
             $("#words").focus(function(){
-                $("#words").scrollIntoViewIfNeeded()
             });
             attention();
         }
@@ -117,6 +120,7 @@ $(function(){
             "opacity":opacity
         })
     }
+    //评论区
     function show_bullet(data){
         for(var i=0;i<data.sum;i++){
             $("#danmaku_container").append("<div class='bullet'"+"id=bullet["+num+"]>" + data.text + "</div>");
@@ -124,4 +128,4 @@ $(function(){
             font_style(bulletname);
         }
     }
-})
+// })
