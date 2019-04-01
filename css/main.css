@@ -38,3 +38,18 @@ video{
 #user{
     width: 45px;
 }
+.imghead{
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    margin-left: 3%;
+    margin-right: 3%;
+    float: left;
+}
+.username{
+    font-size: 25px;
+}
+.comment{
+    width: 95%;
+    padding-bottom: 10%;
+}
