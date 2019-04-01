@@ -66,23 +66,31 @@ $(function(){
             return patt_illegal.test(str);
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
-            $("#user").focus();
+            $("#user").focus(function(){
+                $("#user").scrollIntoViewIfNeeded()
+            });
             errcode=233;
             attention();
         }
         if(check_uni($("#user").val())){
-            $("#user").focus();
+            $("#user").focus(function(){
+                $("#user").scrollIntoViewIfNeeded()
+            });
             errcode=666;
             attention();
         }
         if(isBlank($("#words").val())){
             errcode=233;
-            $("#words").focus();
+            $("#words").focus(function(){
+                $("#words").scrollIntoViewIfNeeded()
+            });
             attention();
         }
         if(check_uni($("#words").val())){
             errcode=666;
-            $("#words").focus();
+            $("#words").focus(function(){
+                $("#words").scrollIntoViewIfNeeded()
+            });
             attention();
         }
         if(errcode==111){
