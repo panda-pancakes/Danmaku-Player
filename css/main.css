@@ -46,6 +46,9 @@ input[type="text"]{
     text-align: center;
     color: dimgray;
 }
+#textbox{
+    margin-bottom: 15px;
+}
 #user{
     width: 45px;
 }

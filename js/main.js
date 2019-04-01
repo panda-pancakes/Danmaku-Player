@@ -49,7 +49,9 @@
     }
     //滚动条 让输入框不要被挡着
     function texting(str){
-        $(str).scrollTop(200);
+        $(str).css({
+            "margin-bottom":"200px"
+        })
     }
     //显示提示
     function attention(){
@@ -108,6 +110,11 @@
         $("#danmaku_container").append("<div class='bullet'"+"id=bullet["+num+"]>" + text + "</div>");
         bulletname="#bulletc["+num+"]";
         font_style(bulletname);
+    }
+    //设置弹幕随机高度
+    function sethigh(str){
+        var high =Array();
+
     }
     //改变字体颜色和大小、透明度
     function font_style(str){
