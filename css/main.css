@@ -32,15 +32,23 @@ video{
     width: 60px;
 }
 select{
+    background-color: ghostwhite;
     border-radius: 3.4em;
     padding-left: 5px;
+    font-size: 10px;
 }
 input[type="text"]{
+    background-color: ghostwhite;
     border-radius: 3.5em;
     padding-left: 5px;
     padding-top: 1.3px;
     padding-bottom: 3px;
     font-size: 7px;
+}
+input[type="checkbox"]{
+    margin: 0;
+    position: relative;
+    top: 2px;
 }
 #textbox,.setting{
     text-align: center;
@@ -72,7 +80,7 @@ input[type="button"]{
 .bullet{
     background: none;
     position: absolute;
-    top: 33px;
+    top: 50px;
     color: white;
     font-size: 25px;
     animation: flying 8s;

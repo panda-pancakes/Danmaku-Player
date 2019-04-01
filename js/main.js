@@ -6,7 +6,8 @@
     var clicktime=3;
     player_onoff();
     //加载弹幕
-    if($("#send_btn").click()||$("#freshen_btn").click()){
+
+    function loading(){
         if(check()==true){
             var ws =new WebSocket(ws_url);
             ws.onopen=function(){
@@ -56,7 +57,7 @@
             $(str).css({
                 "margin-bottom":"unset"
             });
-            },2333);
+            },5000);
     }
     //显示提示
     function attention(){
@@ -116,10 +117,18 @@
         bulletname="#bulletc["+num+"]";
         font_style(bulletname);
     }
+    $("#send_btn").bind("click",function(){
+        loading();
+        go_bullet();
+    })
+    $("#freshen_btn").bind("click",function(){
+        loading();
+        $("#danmaku_container").show();    
+    })
     //设置弹幕随机高度
+    var highs=Array();
     function sethigh(str){
         var high =Array();
-
     }
     //改变字体颜色和大小、透明度
     function font_style(str){
