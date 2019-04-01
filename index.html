@@ -16,35 +16,36 @@
     <div class="navigation">
         <div class="horizontal" id="top">
             <label id="video_name">视频名称</label>
-            <input type="image" id="quit_btn" alt="x">
+            <input type="button" id="quit_btn" value="x">
         </div>
     </div>
     <div id="main_container">
         <!-- <video>video player</video> -->
         <div id="danmaku_container">
+            <div id="bullet[test]" class="bullet">测试弹幕</div>
         </div>
         <div id="attention_box">
-            <img id="attention" src="img/">
+            <p>这是一条提示</p>
         </div>
     </div>
     <div class="navigation">
         <div class="horizontal" id="bottom">
             <div class="setting">
-                <label id="label1" for="show">开关</label>
-                <input type="image" name="show" id="show" alt="on/off">
-                <label for="color">颜色</label>
-                <select name="color" id="color"></select>
-                <label for="size">大小</label>
-                <select name="size" id="size"></select>
-                <label for="opacity">透明度</label>
-                <select name="opacity" id="opacity"></select>
+            <label id="label1"for="show">开关</label>
+            <input type="checkbox" name="show" id="show" alt="o">
+            <label for="color">颜色</label>
+            <select name="color" id="color"></select>        
+            <label for="size">大小</label>
+            <select name="size" id="size"></select>        
+            <label for="opacity">透明度</label>
+            <select name="opacity" id="opacity"></select>
             </div>
             <div id="textbox">
-                <label>加入讨论</label>
-                <input type="text" id="user" placeholder="用户名">
-                <input type="text" id="words" placeholder="发送一条弹幕">
-                <input type="image" id="send_btn" alt="发送">
-                <input type="image" id="freshen_btn" alt="刷新">
+            <label>加入讨论</label>
+            <input type="text" id="user" placeholder="用户名">
+            <input type="text" id="words"  placeholder="发送一条弹幕">
+            <input type="button" id="send_btn" value="发送">
+            <input type="button" id="freshen_btn" value="刷新">
             </div>
         </div>
     </div>

@@ -7,6 +7,9 @@
     top: 0%;
 }
 #bottom{
+    background-color: whitesmoke;
+    width: -webkit-fill-available;
+    position: fixed;
     bottom: 0%;
 }
 #main_container{
@@ -26,14 +29,33 @@ video{
     right: 0%;
 }
 #size{
-    width: 53px;
+    width: 60px;
 }
-#opacity{
-    width: 30px;
+select{
+    background-color: ghostwhite;
+    border-radius: 3.4em;
+    padding-left: 5px;
+    font-size: 10px;
+}
+input[type="text"]{
+    background-color: ghostwhite;
+    border-radius: 3.5em;
+    padding-left: 5px;
+    padding-top: 1.3px;
+    padding-bottom: 3px;
+    font-size: 7px;
+}
+input[type="checkbox"]{
+    margin: 0;
+    position: relative;
+    top: 2px;
 }
 #textbox,.setting{
     text-align: center;
     color: dimgray;
+}
+#textbox{
+    margin-bottom: 15px;
 }
 #user{
     width: 45px;
@@ -52,4 +74,51 @@ video{
 .comment{
     width: 95%;
     padding-bottom: 10%;
+}
+#attention{
+    bottom: 0%;
+    margin: 10px;
+    opacity: 0.75;
+}
+label{
+    font-family: "微软雅黑";
+    font-size: 11px;
+}
+input[type="button"]{
+    -webkit-appearance: button-bevel;
+    border-radius: 1em;
+    text-align: center;
+    font-family: "微软雅黑";
+    color: darkslategray;
+    font-size: 12px;
+}
+.bullet{
+    background: none;
+    position: absolute;
+    top: 50px;
+    color: white;
+    font-size: 25px;
+    animation: flying 8s;
+    animation-timing-function:ease-in;
+    -webkit-animation: flying 8s;
+    -webkit-animation-timing-function:ease-in;
+    animation-fill-mode: forwards;
+}
+@keyframes flying{
+    from{
+        right: 15px;
+    }
+    to{
+        right: 355px;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes flying{
+    from{
+        right: 15px;
+    }
+    to{
+        right: 355px;
+        opacity: 0;
+    }
 }

@@ -1,4 +1,4 @@
-$(function(){
+// $(function(){
     var user=$("#user").val();
     var words=$("#words").val();
     var data;
@@ -6,7 +6,8 @@ $(function(){
     var clicktime=3;
     player_onoff();
     //加载弹幕
-    if($("#send_btn").click()||$("#freshen_btn").click()){
+
+    function loading(){
         if(check()==true){
             var ws =new WebSocket(ws_url);
             ws.onopen=function(){
@@ -47,6 +48,17 @@ $(function(){
         })
         attention();
     }
+    //滚动条 让输入框不要被挡着
+    function texting(str){
+        $(str).css({
+            "margin-bottom":"200px"
+        });
+        setTimeout(function(){
+            $(str).css({
+                "margin-bottom":"unset"
+            });
+            },5000);
+    }
     //显示提示
     function attention(){
         $("#attention").attr("src","img/");
@@ -66,23 +78,30 @@ $(function(){
             return patt_illegal.test(str);
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
-            $("#user").focus();
+            $("#user").focus(function(){
+                texting("#user");
+            });
             errcode=233;
             attention();
         }
         if(check_uni($("#user").val())){
-            $("#user").focus();
+            $("#user").focus(function(){
+                texting("#user");
+            });
             errcode=666;
             attention();
         }
         if(isBlank($("#words").val())){
             errcode=233;
-            $("#words").focus();
+            $("#words").focus(function(){
+                texting("#words");
+            });
             attention();
         }
         if(check_uni($("#words").val())){
             errcode=666;
-            $("#words").focus();
+            $("#words").focus(function(){
+            });
             attention();
         }
         if(errcode==111){
@@ -98,6 +117,19 @@ $(function(){
         bulletname="#bulletc["+num+"]";
         font_style(bulletname);
     }
+    $("#send_btn").bind("click",function(){
+        loading();
+        go_bullet();
+    })
+    $("#freshen_btn").bind("click",function(){
+        loading();
+        $("#danmaku_container").show();    
+    })
+    //设置弹幕随机高度
+    var highs=Array();
+    function sethigh(str){
+        var high =Array();
+    }
     //改变字体颜色和大小、透明度
     function font_style(str){
         var color = $("#color").val();
@@ -109,6 +141,7 @@ $(function(){
             "opacity":opacity
         })
     }
+    //评论区
     function show_bullet(data){
         for(var i=0;i<data.sum;i++){
             $("#danmaku_container").append("<div class='bullet'"+"id=bullet["+num+"]>" + data.text + "</div>");
@@ -116,4 +149,4 @@ $(function(){
             font_style(bulletname);
         }
     }
-})
+// })
