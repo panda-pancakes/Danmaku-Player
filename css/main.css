@@ -1,21 +1,32 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #545353;
+}
+input[type="image"]{
+    position: relative;
+    top: 8.5px;
+}
+#freshen_btn{
+    top: 5px;
+}
 .navigation{
-    background-color: whitesmoke;
-    max-height: 10%;
+    background-color: #545353;
+    height: 15%;
     width: -webkit-fill-available;
 }
 #top{
+    padding: 5px;
     top: 0%;
 }
 #bottom{
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
     width: -webkit-fill-available;
-    position: fixed;
-    bottom: 0%;
 }
 #main_container{
-    background-color: black;
+    background-color: #545353;
     max-width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
     margin: 0%;
 }
 #danmaku_box{
@@ -27,6 +38,7 @@ video{
 #quit_btn{
     position: absolute;
     right: 0%;
+    margin-right: 5px;
 }
 #size{
     width: 60px;
@@ -48,8 +60,9 @@ input[type="text"]{
 input[type="checkbox"]{
     margin: 0;
     position: relative;
-    top: 2px;
+    top: 5px;
 }
+
 #textbox,.setting{
     text-align: center;
     color: dimgray;
@@ -81,8 +94,20 @@ input[type="checkbox"]{
     opacity: 0.75;
 }
 label{
+    color: white;
     font-family: "微软雅黑";
-    font-size: 11px;
+    /* font-size: 11px; */
+}
+#label1{
+    position: relative;
+    top: 3px;
+
+}
+video{
+    height: auto;
+    width: 100%;
+    /* margin-left: 35px;
+    margin-right: 35px; */
 }
 input[type="button"]{
     -webkit-appearance: button-bevel;
@@ -92,16 +117,21 @@ input[type="button"]{
     color: darkslategray;
     font-size: 12px;
 }
+#danmaku_container{
+    position: absolute;
+    top: 30px;
+    width: -webkit-fill-available;
+    height: 200px;
+}
 .bullet{
     background: none;
     position: absolute;
-    top: 50px;
     color: white;
-    font-size: 25px;
-    animation: flying 8s;
-    animation-timing-function:ease-in;
-    -webkit-animation: flying 8s;
-    -webkit-animation-timing-function:ease-in;
+    font-size: x-small;
+    animation: flying 20s;
+    animation-timing-function:ease;
+    -webkit-animation: flying 20s;
+    -webkit-animation-timing-function:ease;
     animation-fill-mode: forwards;
 }
 @keyframes flying{
@@ -109,7 +139,7 @@ input[type="button"]{
         right: 15px;
     }
     to{
-        right: 355px;
+        right:  700px;
         opacity: 0;
     }
 }
@@ -118,7 +148,7 @@ input[type="button"]{
         right: 15px;
     }
     to{
-        right: 355px;
+        right:  700px;
         opacity: 0;
     }
 }

@@ -15,24 +15,23 @@
 <body>
     <div class="navigation">
         <div class="horizontal" id="top">
+            <input type="image" src="img/btn/quit.png" id="quit_btn" value="x">
             <label id="video_name">视频名称</label>
-            <input type="button" id="quit_btn" value="x">
         </div>
     </div>
     <div id="main_container">
-        <!-- <video>video player</video> -->
+        <video src="video/1.mp4"width="600" height="360" 
+        preload controls></video>
         <div id="danmaku_container">
             <div id="bullet[test]" class="bullet">测试弹幕</div>
         </div>
-        <div id="attention_box">
+        <!-- <div id="attention_box">
             <p>这是一条提示</p>
-        </div>
+        </div> -->
     </div>
     <div class="navigation">
         <div class="horizontal" id="bottom">
-            <div class="setting">
-            <label id="label1"for="show">开关</label>
-            <input type="checkbox" name="show" id="show" alt="o">
+            <div class="setting" id="setting_box">
             <label for="color">颜色</label>
             <select name="color" id="color"></select>        
             <label for="size">大小</label>
@@ -41,20 +40,22 @@
             <select name="opacity" id="opacity"></select>
             </div>
             <div id="textbox">
-            <label>加入讨论</label>
+            <label id="label1"for="show">开关</label>
+            <input type="checkbox" name="show" id="show" alt="o">
             <input type="text" id="user" placeholder="用户名">
             <input type="text" id="words"  placeholder="发送一条弹幕">
-            <input type="button" id="send_btn" value="发送">
-            <input type="button" id="freshen_btn" value="刷新">
+            <input type="image" src="img/btn/send.png" id="send_btn" value="发送">
+            <input type="image" src="img/btn/freshen.png" id="freshen_btn" value="刷新">
+            <input type="image" id="setting" value="设置" src="img/btn/setting.png">
             </div>
         </div>
     </div>
-    <div  id="introduction" class="navigation">
+    <!-- <div  id="introduction" class="navigation">
         <img id="introduction" src="img/">
         <div id="title"></div>
         <div id="introduction"></div>
     </div>
-    <div id="comments" class="navigation">
+    <div id="comments" class="navigation"> -->
         <!-- <div class="comment"> -->
             <!-- <img class="imghead" src="#"> -->
             <!-- <div class="username">ID</div> -->
@@ -63,7 +64,7 @@
                 <!-- 评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论评论</div> -->
         <!-- </div> -->
         <!-- 以上仅供测试用 -->
-    </div>
+    <!-- </div> -->
 </body>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/config.js"></script>
