@@ -1,80 +1,81 @@
 // $(function(){
-    var user=$("#user").val();
-    var words=$("#words").val();
-    var data;
-    var num;
-    var clicktime=3;
-    player_onoff();
+    var user = $("#user").val(); 
+    var words = $("#words").val(); 
+    var data; 
+    var num; 
+    var clicktime = 3; 
+    player_onoff(); 
     //加载弹幕
 
-    function loading(){
-        if(check()==true){
-            var ws =new WebSocket(ws_url);
-            ws.onopen=function(){
-                var package={
-                    "user":user,
+    function loading() {
+        if (check() == true) {
+            var ws = new WebSocket(ws_url); 
+            ws.onopen = function() {
+                var package =  {
+                    "user":user, 
                     "words":words
                 }
-                ws.send(JSON.stringify(package));
-                go_bullet();
-                console.log("发送弹幕");
+                ws.send(JSON.stringify(package)); 
+                go_bullet(); 
+                console.log("发送弹幕"); 
             }
             //发送弹幕
-            ws.onmessage=function(evt){
-                data=evt.data;
-                show_bullet(data);
+            ws.onmessage = function(evt) {
+                data = evt.data; 
+                show_bullet(data); 
             }
             //收集服务器上的弹幕
-            ws.onclose=function(){
-                console.log("关闭ws");
+            ws.onclose = function() {
+                console.log("关闭ws"); 
             }
     
-        }else{
-            attention();
+        }else {
+            attention(); 
         }
     }
     //显示或关闭弹幕
-    function player_onoff(){
-        $("#show").click(function(){
-            if(clicktime==3||clicktime==0){
-                clicktime=1;
-                console.log("关闭弹幕");
-                $("#danmaku_container").hide();    
-            }else{
-                clicktime=0;
-                console.log("显示弹幕");
-                $("#danmaku_container").show();    
+    function player_onoff() {
+        $("#show").click(function () {
+            if (clicktime == 3 || clicktime == 0) {
+                clicktime = 1; 
+                console.log("关闭弹幕"); 
+                $("#danmaku_container").hide(); 
+            }else {
+                clicktime = 0; 
+                console.log("显示弹幕"); 
+                $("#danmaku_container").show(); 
             }
         })
-        attention();
+        attention(); 
     }
     //滚动条 让输入框不要被挡着
-    function texting(str){
-        $(str).css({
+    function texting(str) {
+        console.log("别挡着"); 
+        $(str).css( {
             "margin-bottom":"200px"
-        });
-        setTimeout(function(){
-            $(str).css({
-                "margin-bottom":"unset"
-            });
-            },5000);
+        }); 
+        // setTimeout(function(){
+        //     $(str).css({
+        //         "margin-bottom":"inherit"
+        //     });
+        //     },5000);
     }
     //显示提示
-    function attention(){
-        $("#attention").attr("src","img/");
-        $("#attention").show();
-        setTimeout(function(){
+    function attention() {
+        $("#attention").attr("src", "img/"); 
+        $("#attention").show(); 
+        setTimeout(function () {
             $("#attention").hide()
-        },2333);
+        }, 2333); 
     }
     //前端检查
-    function check(){
-        var errcode=111;
+    function check() {
+        var errcode = 111; 
         function isBlank(str) {
-            return (!str || /^\s*$/.test(str));
+            return ( ! str || /^\s * $/.test(str)); 
         }//是否为空
-        function check_uni(str) {
-            var patt_illegal = new RegExp(/[\@\#\$\%\^\&\*{\}\:\\L\<\>\?}\'\"\\\/\b\f\n\r\t]/g);
+function check_uni(str) {
+            var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
             return patt_illegal.test(str);
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
@@ -127,8 +128,17 @@
     })
     //设置弹幕随机高度
     var highs=Array();
-    function sethigh(str){
-        var high =Array();
+    function sethigh(str,a){
+        var high=Math.random()*275+35;
+        for(var i =0;i<=highs.length;i++){
+            if(highs[i]==highs[a]){
+                var depart = 300 -high[i];
+                high=Math.random()*depart+35;
+                return high;
+            }
+        }
+        highs[a]=high;
+        return high;
     }
     //改变字体颜色和大小、透明度
     function font_style(str){
