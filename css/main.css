@@ -169,7 +169,7 @@ label{
     font-size: x-small;
     opacity: 0.3;
 }
-video{
+video,source{
     height: auto;
     width: 100%;
     /* margin-left: 35px;
