@@ -4,6 +4,7 @@ $(function(){
     var data; 
     var num; 
     var clicktime = 3; 
+    var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php"
     player_onoff(); 
     //加载弹幕
 
@@ -62,10 +63,10 @@ $(function(){
     }
     //显示提示
     function attention() {
-        $("#attention").attr("src", "img/"); 
+        $("#attention").text("EXM？您做了什么？");
         $("#attention").show(); 
         setTimeout(function () {
-            $("#attention").hide()
+            $("#attention").hide();
         }, 2333); 
     }
     //前端检查
