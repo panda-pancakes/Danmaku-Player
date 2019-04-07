@@ -4,7 +4,7 @@ $(function(){
     var data; 
     var num; 
     var clicktime = 3; 
-    var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php"
+    var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php";
     player_onoff(); 
     //加载弹幕
 
