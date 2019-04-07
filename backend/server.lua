@@ -19,10 +19,15 @@ function register(s)
 end
 
 function unregister(s)
-	hold[s:socket()] = nil
-	for i = 1, #link do 
-		if link[i] == s:socket() then
+	for i = 1, #link do
+		if hold[link[i]] == s then
 			table.remove(link, i)
+			break
+		end
+	end
+	for k, v in pairs(hold) do
+		if v == s then
+			hold[k] = nil
 			break
 		end
 	end
