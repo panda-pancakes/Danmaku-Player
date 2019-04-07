@@ -1,6 +1,6 @@
 <?php 
 //require_once(__DIR__.'/SensitiveWord.php');
-$ws = new swoole_websocket_server("0.0.0.0", 9505);
+$ws = new swoole_websocket_server("0.0.0.0", 80);
 //$sen = new SensitiveWord(__DIR__.'/chinese_dictionary.txt');
 $ws->on('open', function ($ws, $request) {
 
