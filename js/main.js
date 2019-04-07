@@ -2,7 +2,7 @@ $(function(){
     var user = $("#user").val(); 
     var words = $("#words").val(); 
     var data; 
-    var num; 
+    var num=0;
     var clicktime = 3; 
     var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php"
     player_onoff(); 
@@ -40,11 +40,11 @@ $(function(){
             if (clicktime == 3 || clicktime == 0) {
                 clicktime = 1; 
                 console.log("关闭弹幕"); 
-                $("#danmaku_container").hide(); 
+                $(".danmaku_container").hide(); 
             }else {
                 clicktime = 0; 
                 console.log("显示弹幕"); 
-                $("#danmaku_container").show(); 
+                $(".danmaku_container").show(); 
             }
         })
         attention(); 
@@ -55,11 +55,11 @@ $(function(){
         $(str).css( {
             "margin-bottom":"200px"
         }); 
-        // setTimeout(function(){
-        //     $(str).css({
-        //         "margin-bottom":"inherit"
-        //     });
-        //     },5000);
+        setTimeout(function(){
+            $(str).css({
+                "margin-bottom":"inherit"
+            });
+            },5000);
     }
     //显示提示
     function attention() {
@@ -107,6 +107,9 @@ var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/
             attention();
         }
         if(errcode==111){
+            $("#user").css({
+                opacity: 0.8
+            })
             return true;//检查函数 验证通过返回true
         }else{
             return false;
@@ -115,25 +118,30 @@ var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/
     
 //设置弹幕随机高度
 var highs=Array();
-function sethigh(str,a){
-        var high=Math.random()*275+35;
-        for(var i =0;i<=highs.length;i++){
-            if(highs[i]==highs[a]){
-                var depart = 300 -high[i];
-                high=Math.random()*depart+35;
-                return high;
-            }
-        }
-        highs[a]=high;
+highs[0]=0;
+function sethigh(){
+        var high=Math.random()*100+35;
         return high;
     }
 
 //插入弹幕
 function go_bullet() {
     var text = $("#words").val();
-    $("#danmaku_container").append("<div class='bullet'" + "id=bullet[" + num + "]>" + text + "</div>");
-    bulletname = "#bulletc[" + num + "]";
-    font_style(bulletname);
+    num=num++;
+    containername = "container[" + num + "]";
+    bulletname = "bulletc[" + num + "]";
+    var color = $("#color").val();
+    var size = $("#size").val();
+    var opacity = $("#opacity").val();
+    // font_style(bulletname);
+    // $(containername).css({
+    //     "top":sethigh(),
+    // })
+    $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
+    +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+color+";size:"+size+";opacity:"+opacity+";"
+    +">" + text +"</div>"
+    +"</div>");//包含在内
+    // $(containername).append("<div class='bullet'" + "id=bullet[" + num + "]>" + text + "</div>");
 }
 //按钮设置
 $("#send_btn").bind("click", function () {
@@ -142,28 +150,30 @@ $("#send_btn").bind("click", function () {
 })
 $("#freshen_btn").click(function () {
     loading();
-    $("#danmaku_container").show();
+    $(".danmaku_container").show();
 })
 $("#setting_box").hide();
 $("#setting").click(function(){
     $("#setting_box").show();
     $("#slider").slider();
 })
-//改变字体颜色和大小、透明度
-function font_style(str) {
-    var color = $("#color").val();
-    var size = $("#size").val();
-    var opacity = $("#opacity").val();
-    $(str).css({
-        "color": color,
-        "font-size": size,
-        "opacity": opacity
-    })
-}
+//改变字体颜色和大小、透明度      哇因为append的时候就已经写入函数了 改变不了
+// function font_style(str) {
+//     var color = $("#color").val();
+//     var size = $("#size").val();
+//     var opacity = $("#opacity").val();
+//     $(str).css({
+//         "color": color,
+//         "font-size": size,
+//         "opacity": opacity
+//     })
+// }
+
 //评论区
 function show_bullet(data) {
     for (var i = 0; i < data.sum; i++) {
-        $("#danmaku_container").append("<div class='bullet'" + "id=bullet[" + num + "]>" + data.text + "</div>");
+        //哇这个明显写错了 danmaku_container是用来在视频上显示弹幕 的  评论区要专门做呀
+        // $(".danmaku_container").append("<div class='bullet'" + "id=bullet[" + num + "]>" + data.text + "</div>");
         bulletname = "#bulletc[" + num + "]";
         font_style(bulletname);
     }

@@ -66,7 +66,7 @@ select{
     /* display: flex; */
     flex-flow: nowrap;
     position: relative;
-    margin-left: 68px;
+    margin-left: 125px;
     bottom: 11px;
 }
 .ui-state-default, .ui-widget-content .ui-state-default{
@@ -96,6 +96,10 @@ input[type="checkbox"]{
 #textbox,.setting{
     text-align: center;
     color: dimgray;
+}
+.setting{
+    text-align: start;
+    padding-left: 30px;
 }
 #textbox{
     margin-bottom: 15px;
@@ -151,7 +155,7 @@ input[type="button"]{
     color: darkslategray;
     font-size: 12px;
 }
-#danmaku_container{
+.danmaku_container{
     position: absolute;
     top: 30px;
     width: -webkit-fill-available;
