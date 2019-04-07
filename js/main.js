@@ -1,4 +1,4 @@
-// $(function(){
+$(function(){
     var user = $("#user").val(); 
     var words = $("#words").val(); 
     var data; 
@@ -134,15 +134,20 @@ function go_bullet() {
     bulletname = "#bulletc[" + num + "]";
     font_style(bulletname);
 }
+//按钮设置
 $("#send_btn").bind("click", function () {
     loading();
     go_bullet();
 })
-$("#freshen_btn").bind("click", function () {
+$("#freshen_btn").click(function () {
     loading();
     $("#danmaku_container").show();
 })
 $("#setting_box").hide();
+$("#setting").click(function(){
+    $("#setting_box").show();
+    $("#slider").slider();
+})
 //改变字体颜色和大小、透明度
 function font_style(str) {
     var color = $("#color").val();
@@ -162,4 +167,4 @@ function show_bullet(data) {
         font_style(bulletname);
     }
 }
-// })
+})

@@ -3,6 +3,7 @@ body{
     padding: 0;
     background-color: #545353;
 }
+/*清空＋设置背景色*/
 input[type="image"]{
     position: relative;
     top: 8.5px;
@@ -10,10 +11,14 @@ input[type="image"]{
 #freshen_btn{
     top: 5px;
 }
+/*初始化标签及图片按钮*/
 .navigation{
     background-color: #545353;
     height: 15%;
     width: -webkit-fill-available;
+    white-space: nowrap;
+    padding-left: 1px;
+    margin-right: 10px;
 }
 #top{
     padding: 5px;
@@ -35,6 +40,7 @@ input[type="image"]{
 video{
     background-color: black;
 }
+/*主要容器*/
 #quit_btn{
     position: absolute;
     right: 0%;
@@ -43,24 +49,48 @@ video{
 #size{
     width: 60px;
 }
+/*滑块*/
 select{
     background-color: ghostwhite;
     border-radius: 3.4em;
     padding-left: 5px;
     font-size: 10px;
 }
+.opacity{
+    white-space: nowrap;
+    text-align: start;
+}
+#slider{
+    max-width: 68px;
+    height: 2px;
+    /* display: flex; */
+    flex-flow: nowrap;
+    position: relative;
+    margin-left: 68px;
+    bottom: 11px;
+}
+.ui-state-default, .ui-widget-content .ui-state-default{
+    left: 0%;
+    /* border: 0.1px; */
+    height: 0.6em;
+    width: 0.7em;
+}
 input[type="text"]{
-    background-color: ghostwhite;
-    border-radius: 3.5em;
+    background-color: #efecec;
+    border-radius: 3.7px;
     padding-left: 5px;
-    padding-top: 1.3px;
-    padding-bottom: 3px;
+    padding-top: 5px;
+    padding-bottom: 5.4px;
+    border: 0;
+    -webkit-appearance: none;
     font-size: 7px;
 }
 input[type="checkbox"]{
     margin: 0;
     position: relative;
+    opacity: 0.7;
     top: 5px;
+    -webkit-appearance: radio;
 }
 
 #textbox,.setting{
@@ -93,6 +123,9 @@ input[type="checkbox"]{
     margin: 10px;
     opacity: 0.75;
 }
+#setting{
+    top: 6.7px;
+}
 label{
     color: white;
     font-family: "微软雅黑";
@@ -101,7 +134,8 @@ label{
 #label1{
     position: relative;
     top: 3px;
-
+    font-size: x-small;
+    opacity: 0.3;
 }
 video{
     height: auto;

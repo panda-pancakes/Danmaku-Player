@@ -9,6 +9,9 @@
     minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <meta name="description" content="弹幕练习">
     <meta name="description" content="弹幕练习">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
 </head>
 
@@ -35,18 +38,21 @@
             <label for="color">颜色</label>
             <select name="color" id="color"></select>        
             <label for="size">大小</label>
-            <select name="size" id="size"></select>        
-            <label for="opacity">透明度</label>
-            <select name="opacity" id="opacity"></select>
+            <select name="size" id="size"></select>
+            <div class="opacity">
+                <label for="opacity">透明度</label>
+                <!-- <select name="opacity" id="opacity"></select> -->
+                <div id="slider"></div>    
+            </div>        
             </div>
             <div id="textbox">
-            <label id="label1"for="show">开关</label>
-            <input type="checkbox" name="show" id="show" alt="o">
             <input type="text" id="user" placeholder="用户名">
             <input type="text" id="words"  placeholder="发送一条弹幕">
             <input type="image" src="img/btn/send.png" id="send_btn" value="发送">
             <input type="image" src="img/btn/freshen.png" id="freshen_btn" value="刷新">
             <input type="image" id="setting" value="设置" src="img/btn/setting.png">
+            <input type="checkbox" name="show" id="show" alt="o">
+            <label id="label1"for="show">开关</label>
             </div>
         </div>
     </div>
@@ -66,7 +72,6 @@
         <!-- 以上仅供测试用 -->
     <!-- </div> -->
 </body>
-<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 
