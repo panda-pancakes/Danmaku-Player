@@ -2,6 +2,7 @@ $(function (){
     var name = $("#video_name").val();
     var src1 = "https://vodkgeyttp8.vod.126.net/cloudmusic/7ee3/mv/a104/181251ac9d84d0f40c5fa2d8fc263e7e.mp4?wsSecret=e1e5e8d65c7f5edc9dc3de8cd744ee3d&wsTime=1554628539";
     $("video").attr("src",src1);
+    // $("video").load();//没有用
     $("#video_name").text("SEARCH");
     // var viedo_src = $("#video").attr("src","video/");
     // var danmaku;
