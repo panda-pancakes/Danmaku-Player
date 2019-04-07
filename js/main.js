@@ -118,7 +118,7 @@ var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/
     
 //设置弹幕随机高度
 var highs=Array();
-highs[0]=0;
+highs[0]=0;//用来设置底部 顶部 弹幕的 不过鉴于DDL紧迫 弃暗投明（不是
 function sethigh(){
         var high=Math.random()*100+35;
         return high;
@@ -126,10 +126,16 @@ function sethigh(){
 
 //插入弹幕
 function go_bullet() {
+    var user = $("#user").val(); 
+    if(user==undefined||user==""){
+        user="一位不愿意透露姓名的用户";
+    }
     var text = $("#words").val();
     num=num++;
     containername = "container[" + num + "]";
     bulletname = "bulletc[" + num + "]";
+    say_a_word(user,text);
+    console.log("写进评论");
     var color = $("#color").val();
     var size = $("#size").val();
     var opacity = $("#opacity").val();
@@ -141,7 +147,17 @@ function go_bullet() {
     +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+color+";size:"+size+";opacity:"+opacity+";"
     +">" + text +"</div>"
     +"</div>");//包含在内
-    // $(containername).append("<div class='bullet'" + "id=bullet[" + num + "]>" + text + "</div>");
+}
+//插入弹幕时发表评论
+function say_a_word(user,str){
+    var now=new Date();
+    date=now.getFullYear()+"/"+now.getMonth()+"/"+now.getDay()+"/"+now.getHours()+":"+now.getMinutes();
+    $("#comments").append("<div class='comment'>"+
+    "<img class='imghead'  id='"+user+"' src='img/icon_sample.png'>"
+    +"<div class='username'>"+user+"</div>" //用户名
+    +"<div class='time'>"+date+"</div>" //时间
+    +"<div class='text'>"+str //评论内容
+    +"</div></div>");
 }
 //按钮设置
 $("#send_btn").bind("click", function () {

@@ -34,6 +34,14 @@ input[type="image"]{
     /* height: -webkit-fill-available; */
     margin: 0%;
 }
+#comments{
+    background-color: #e9e9e9;
+    padding-left: 15px;
+    color: #545353;
+    margin-right: 0px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
 #danmaku_box{
     float: right;
 }
@@ -116,11 +124,31 @@ input[type="checkbox"]{
     float: left;
 }
 .username{
-    font-size: 25px;
+    font-size: 15px;
+}
+.time{
+    font-size: 12px;
 }
 .comment{
-    width: 95%;
+    background-color: whitesmoke;
+    /* width: 95%; */
+    margin-top: 2px;
+    margin-left: -15px;
     padding-bottom: 10%;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+.text{
+    background-color: #ece5e5;
+    display: flex;
+    margin-left: 55px;
+    margin-top: 10px;
+    margin-right: 15px;
+    padding: 5px;
+    padding-bottom: 15px;
+    /* width: 300px; */
+    opacity: 0.8;
+    white-space: initial;
 }
 #attention{
     bottom: 0%;
