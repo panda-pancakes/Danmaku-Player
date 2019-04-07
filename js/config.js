@@ -6,11 +6,11 @@ $(function (){
     var display=Array();
     var size=Array();
     function setstyle(){
-        color[0]="red";
+        color[0]="white";
         color[1]="orange";         
         color[2]="green";
         color[3]="blue";
-        color[4]="white"
+        color[4]="red";
         display[0]="1";
         display[1]="0.75";
         display[2]="0.5";
