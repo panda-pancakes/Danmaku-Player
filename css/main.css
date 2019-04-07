@@ -214,7 +214,7 @@ input[type="button"]{
         right: 15px;
     }
     to{
-        right:  700px;
+        right:  1000px;
         opacity: 0;
     }
 }

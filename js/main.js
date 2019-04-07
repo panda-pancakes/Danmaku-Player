@@ -75,13 +75,14 @@ $(function(){
         function isBlank(str) {
             return ( ! str || /^\s * $/.test(str)); 
         }//是否为空
-function check_uni(str) {
-var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
+        function check_uni(str) {
+            var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
             return patt_illegal.test(str);
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
             $("#user").focus(function(){
                 texting("#user");
+                $("#user").scrollIntoView(alignWithTop);
             });
             errcode=233;
             attention();
@@ -89,6 +90,7 @@ var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/
         if(check_uni($("#user").val())){
             $("#user").focus(function(){
                 texting("#user");
+                $("#user").scrollIntoView(alignWithTop);
             });
             errcode=666;
             attention();
@@ -97,12 +99,14 @@ var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/
             errcode=233;
             $("#words").focus(function(){
                 texting("#words");
+                $("#words").scrollIntoView(alignWithTop);
             });
             attention();
         }
         if(check_uni($("#words").val())){
             errcode=666;
             $("#words").focus(function(){
+                $("#words").scrollIntoView(alignWithTop);
             });
             attention();
         }
@@ -170,7 +174,7 @@ $("#freshen_btn").click(function () {
 })
 $("#setting_box").hide();
 $("#setting").click(function(){
-    $("#setting_box").show();
+    $("#setting_box").slideToggle();
     $("#slider").slider();
 })
 //改变字体颜色和大小、透明度      哇因为append的时候就已经写入函数了 改变不了
