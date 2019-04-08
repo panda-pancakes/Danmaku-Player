@@ -7,6 +7,7 @@ local danmaku = {}
 local ws
 local hold = {}
 local link = {}
+local block = {}
 
 function logprint(...)
 	io.write(os.date(), " | ")
@@ -37,6 +38,12 @@ function load()
 	local f = io.open("database", "r")
 	danmaku = cjson.decode(f:read("*a")) or {}
 	f:close()
+
+	local f = io.open("block", "r")
+	for line in f:lines() do
+		block[line] = true
+	end
+	f:close()
 end
 
 function save()
@@ -58,6 +65,9 @@ function broadcast(tp, data)
 end
 
 function filter(str)
+	for k, v in pairs(block) do
+		str = str:gsub(k, "***")
+	end
 	return str
 end
 
@@ -133,11 +143,7 @@ function main()
 						unregister(r)
 					else 
 						logprint("received: ", tostring(res))
-						if res == "$exit$" then
-							break
-						else
-							process(r, res)
-						end
+						process(r, res)
 					end
 				end
 			end
