@@ -115,7 +115,7 @@ $(function(){
         if(isBlank($("#user").val())){
             $("#user").focus(function(){
                 // texting("#user");
-                $("#user").scrollIntoView(alignWithTop);
+                // $("#user").scrollIntoView(alignWithTop);
             });
             errcode=233;//不能通过
             attention();
@@ -123,7 +123,7 @@ $(function(){
         if(check_uni($("#user").val())){
             $("#user").focus(function(){
                 // texting("#user");
-                $("#user").scrollIntoView(alignWithTop);
+                // $("#user").scrollIntoView(alignWithTop);
             });
             errcode=666;//不能通过
             attention();
@@ -134,14 +134,14 @@ $(function(){
             errcode=233;
             $("#words").focus(function(){
                 // texting("#words");
-                $("#words").scrollIntoView(alignWithTop);
+                // $("#words").scrollIntoView(alignWithTop);
             });
             attention();
         }
         if(check_uni($("#words").val())){
             errcode=666;
             $("#words").focus(function(){
-                $("#words").scrollIntoView(alignWithTop);
+                // $("#words").scrollIntoView(alignWithTop);
             });
             attention();
         }else{
@@ -213,16 +213,6 @@ $("#setting").click(function(){
     $("#slider").slider();
 })
 //改变字体颜色和大小、透明度      哇因为append的时候就已经写入函数了 改变不了
-// function font_style(str) {
-//     var color = $("#color").val();
-//     var size = $("#size").val();
-//     var opacity = $("#opacity").val();
-//     $(str).css({
-//         "color": color,
-//         "font-size": size,
-//         "opacity": opacity
-//     })
-// }
 
 //评论区
 function show_bullet(data) {
