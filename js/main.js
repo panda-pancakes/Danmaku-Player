@@ -14,6 +14,7 @@ $(function(){
             var ws = new WebSocket(ws_url); 
             ws.onopen = function() {
                 var package =  {
+                    "method":"new_comment",
                     "user":user, 
                     "words":words
                 }
