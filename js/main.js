@@ -43,7 +43,7 @@ $(function(){
                 var package =  {
                     "method":"new_comment",
                     "comment":words,
-                    "timestamp":timestamp,
+                    "time":timestamp,
                     "user":user,
                 }
                 console.log("package:"+user+":"+words+";"+timestamp+";");
