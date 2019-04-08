@@ -1,38 +1,66 @@
 $(function(){
-    var user = $("#user").val(); 
-    var words = $("#words").val(); 
     var data; 
+    var now=new Date();
+    var timestamp=Math.round(now.getTime()/1000);//unix时间戳
+    date=now.getFullYear()+"/"+now.getMonth()+"/"+now.getDay()+"/"+now.getHours()+":"+now.getMinutes();
     var num=0;
     var clicktime = 3; 
     //var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php";
-    var ws_url="ws://server.sforest.in:20480/";
+    var ws_url="ws://server.sforest.in:20480";
     player_onoff(); 
-    //加载弹幕
+    //弹幕开关
 
+
+    //加载弹幕  用于刷新按钮
+    function showall(){
+        var ws = new WebSocket(ws_url); 
+        ws.onopen = function() {
+            var package =  {
+                "method":"request_all",
+            }
+            ws.send(JSON.stringify(package)); 
+        }
+        ws.onmessage = function(evt) {
+            data = evt.data; 
+            data=JSON.parse(data);
+            console.log(data);
+            // show_bullet(data); 
+        }
+        //收集服务器上的弹幕
+        setTimeout(function(){
+            ws.onclose = function() {
+                console.log("关闭ws"); 
+            }    
+        },5000*3);
+    }
     function loading() {
-        if (check() == true) {
+        var user = $("#user").val(); 
+        var words = $("#words").val();     
+        var isok=check();
+        if (isok) {
             var ws = new WebSocket(ws_url); 
             ws.onopen = function() {
                 var package =  {
                     "method":"new_comment",
-                    "user":user, 
-                    "words":words
+                    "comment":words,
+                    "timestamp":timestamp,
+                    "user":user,
                 }
+                console.log("package:"+user+":"+words+";"+timestamp+";");
                 ws.send(JSON.stringify(package)); 
                 go_bullet(); 
                 console.log("发送弹幕"); 
+                $("#attention").text("发送弹幕");
+                attention();
             }
             //发送弹幕
-            ws.onmessage = function(evt) {
-                data = evt.data; 
-                show_bullet(data); 
-            }
-            //收集服务器上的弹幕
-            ws.onclose = function() {
-                console.log("关闭ws"); 
-            }
-    
+            setTimeout(function(){
+                ws.onclose = function() {
+                    console.log("关闭ws"); 
+                }    
+            },5000*3);
         }else {
+            $("#attention").text("出了点小差错！");
             attention(); 
         }
     }
@@ -42,10 +70,14 @@ $(function(){
             if (clicktime == 3 || clicktime == 0) {
                 clicktime = 1; 
                 console.log("关闭弹幕"); 
+                $("#attention").text("关闭弹幕");
+                attention();
                 $(".danmaku_container").hide(); 
             }else {
                 clicktime = 0; 
                 console.log("显示弹幕"); 
+                $("#attention").text("显示弹幕");
+                attention();
                 $(".danmaku_container").show(); 
             }
         })
@@ -65,15 +97,14 @@ $(function(){
     }
     //显示提示
     function attention() {
-        $("#attention").text("EXM？您做了什么？");
-        $("#attention").show(); 
+        $("#attention_box").show(); 
         setTimeout(function () {
-            $("#attention").hide();
+            $("#attention_box").hide();
         }, 2333); 
     }
     //前端检查
     function check() {
-        var errcode = 111; 
+        var errcode = 222; 
         function isBlank(str) {
             return ( ! str || /^\s * $/.test(str)); 
         }//是否为空
@@ -83,24 +114,26 @@ $(function(){
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
             $("#user").focus(function(){
-                texting("#user");
+                // texting("#user");
                 $("#user").scrollIntoView(alignWithTop);
             });
-            errcode=233;
+            errcode=233;//不能通过
             attention();
         }
         if(check_uni($("#user").val())){
             $("#user").focus(function(){
-                texting("#user");
+                // texting("#user");
                 $("#user").scrollIntoView(alignWithTop);
             });
-            errcode=666;
+            errcode=666;//不能通过
             attention();
+        }else{
+            errcode=111;
         }
         if(isBlank($("#words").val())){
             errcode=233;
             $("#words").focus(function(){
-                texting("#words");
+                // texting("#words");
                 $("#words").scrollIntoView(alignWithTop);
             });
             attention();
@@ -111,6 +144,8 @@ $(function(){
                 $("#words").scrollIntoView(alignWithTop);
             });
             attention();
+        }else{
+            errcode=111;
         }
         if(errcode==111){
             $("#user").css({
@@ -156,8 +191,6 @@ function go_bullet() {
 }
 //插入弹幕时发表评论
 function say_a_word(user,str){
-    var now=new Date();
-    date=now.getFullYear()+"/"+now.getMonth()+"/"+now.getDay()+"/"+now.getHours()+":"+now.getMinutes();
     $("#comments").append("<div class='comment'>"+
     "<img class='imghead'  id='"+user+"' src='img/icon_sample.png'>"
     +"<div class='username'>"+user+"</div>" //用户名
@@ -171,7 +204,7 @@ $("#send_btn").bind("click", function () {
     go_bullet();
 })
 $("#freshen_btn").click(function () {
-    loading();
+    showall();
     $(".danmaku_container").show();
 })
 $("#setting_box").hide();

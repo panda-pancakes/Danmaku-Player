@@ -48,6 +48,15 @@ input[type="image"]{
 video{
     background-color: black;
 }
+#attention_box{
+    display: none;
+    position: relative;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    display: flex;
+    top: -100px;
+}
 /*主要容器*/
 #quit_btn{
     position: absolute;
