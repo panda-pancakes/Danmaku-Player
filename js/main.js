@@ -24,6 +24,7 @@ $(function(){
             data = evt.data; 
             data=JSON.parse(data);
             console.log(data);
+            //go_bullet(data);
             // show_bullet(data); 
         }
         //收集服务器上的弹幕
@@ -201,7 +202,7 @@ function say_a_word(user,str){
 //按钮设置
 $("#send_btn").bind("click", function () {
     loading();
-    go_bullet();
+    //go_bullet();
 })
 $("#freshen_btn").click(function () {
     showall();
