@@ -49,7 +49,15 @@ $(function(){
                 }
                 console.log("package:"+user+":"+words+";"+timestamp+";");
                 ws.send(JSON.stringify(package)); 
-                go_bullet(); 
+                ws.onmessage = function(evt) {
+                    data = evt.data; 
+                    data=JSON.parse(data);
+                    var text = data.comment;
+                    console.log(data);
+                    go_bullet(text);
+                    show_bullet(text); 
+                }
+                // go_bullet(); 
                 console.log("发送弹幕"); 
                 $("#attention").text("发送弹幕");
                 attention();
@@ -167,12 +175,13 @@ function sethigh(){
     }
 
 //插入弹幕
-function go_bullet() {
+function go_bullet(text) {
+    console.log(text);
     var user = $("#user").val(); 
     if(user==undefined||user==""){
         user="一位不愿意透露姓名的用户";
     }
-    var text = $("#words").val();
+    //var text = $("#words").val();
     num=num++;
     containername = "container[" + num + "]";
     bulletname = "bulletc[" + num + "]";
