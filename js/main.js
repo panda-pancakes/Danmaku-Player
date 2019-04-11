@@ -60,7 +60,6 @@ $(function(){
                 console.log("发送弹幕"); 
                 $("#attention").text("发送弹幕");
                 attention();
-                showall();
             }
             //发送弹幕
             setTimeout(function(){
@@ -176,8 +175,8 @@ function sethigh(){
 
 //插入弹幕
 function go_bullet(text) {
-    console.log(text);
     var user = $("#user").val(); 
+    $("#words").val("");
     if(user==undefined||user==""){
         user="一位不愿意透露姓名的用户";
     }
