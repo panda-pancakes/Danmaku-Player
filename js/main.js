@@ -24,15 +24,15 @@ $(function(){
             data = evt.data; 
             data=JSON.parse(data);
             console.log(data);
-            console.log(data.data[0].comment);
             text = data.data[0].comment;
+            ws.close();
         }
         //收集服务器上的弹幕
-        setTimeout(function(){
-            ws.onclose = function() {
-                console.log("关闭ws"); 
-            }    
-        },5000*3);
+        // setTimeout(function(){
+        //     ws.onclose = function() {
+        //         console.log("关闭ws"); 
+        //     }    
+        // },5000*3);
     }
     function loading() {
         var user = $("#user").val(); 
@@ -47,6 +47,7 @@ $(function(){
                     "time":timestamp,
                     "user":user,
                 }
+                $("#words").val("");
                 console.log("package:"+user+":"+words+";"+timestamp+";");
                 ws.send(JSON.stringify(package)); 
                 ws.onmessage = function(evt) {
@@ -55,18 +56,19 @@ $(function(){
                     console.log(data.data[0].comment);
                     text = data.data[0].comment;
                     go_bullet(text);
-                    show_bullet(text);  
+                    show_bullet(text);
+                    ws.close();  
                 }
                 console.log("发送弹幕"); 
                 $("#attention").text("发送弹幕");
                 attention();
             }
             //发送弹幕
-            setTimeout(function(){
-                ws.onclose = function() {
-                    console.log("关闭ws"); 
-                }    
-            },5000*3);
+            // setTimeout(function(){
+            //     ws.onclose = function() {
+            //         console.log("关闭ws"); 
+            //     }    
+            // },5000*3);
         }else {
             $("#attention").text("出了点小差错！");
             attention(); 
@@ -176,7 +178,6 @@ function sethigh(){
 //插入弹幕
 function go_bullet(text) {
     var user = $("#user").val(); 
-    $("#words").val("");
     if(user==undefined||user==""){
         user="一位不愿意透露姓名的用户";
     }
