@@ -24,8 +24,8 @@ $(function(){
             data = evt.data; 
             data=JSON.parse(data);
             console.log(data);
-            //go_bullet(data);
-            // show_bullet(data); 
+            console.log(data.data[0].comment);
+            text = data.data[0].comment;
         }
         //收集服务器上的弹幕
         setTimeout(function(){
@@ -51,16 +51,16 @@ $(function(){
                 ws.send(JSON.stringify(package)); 
                 ws.onmessage = function(evt) {
                     data = evt.data; 
-                    data=JSON.parse(data);
-                    var text = data.comment;
-                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data.data[0].comment);
+                    text = data.data[0].comment;
                     go_bullet(text);
-                    show_bullet(text); 
+                    show_bullet(text);  
                 }
-                // go_bullet(); 
                 console.log("发送弹幕"); 
                 $("#attention").text("发送弹幕");
                 attention();
+                showall();
             }
             //发送弹幕
             setTimeout(function(){
@@ -181,7 +181,6 @@ function go_bullet(text) {
     if(user==undefined||user==""){
         user="一位不愿意透露姓名的用户";
     }
-    //var text = $("#words").val();
     num=num++;
     containername = "container[" + num + "]";
     bulletname = "bulletc[" + num + "]";
@@ -211,7 +210,6 @@ function say_a_word(user,str){
 //按钮设置
 $("#send_btn").bind("click", function () {
     loading();
-    //go_bullet();
 })
 $("#freshen_btn").click(function () {
     showall();
