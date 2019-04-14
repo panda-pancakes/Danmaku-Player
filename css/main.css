@@ -6,7 +6,7 @@ body{
 /*清空＋设置背景色input[type="image"]*/
 .btn{
     position: relative;
-    top: 8.5px;
+    top: 7.5px;
 }
 #freshen_btn{
     top: 5px;
@@ -104,10 +104,10 @@ select{
 }
 input[type="text"]{
     background-color: #efecec;
-    border-radius: 3.7px;
+    border-radius: 4em;
     padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5.4px;
+    padding-top: 3px;
+    padding-bottom: 3.6px;
     border: 0;
     -webkit-appearance: none;
     font-size: 7px;
@@ -120,7 +120,7 @@ input[type="checkbox"]{
     -webkit-appearance: checkbox;
 }
 #send_btn{
-    height: 22px;
+    height: 18px;
 }
 #textbox,.setting{
     position: relative;
@@ -134,7 +134,7 @@ input[type="checkbox"]{
 .setting{
     text-align: left;
     margin: 0px;
-    padding-left: 15px;
+    padding-left: 8px;
     padding-bottom: 12px;
 }
 #textbox{
@@ -225,7 +225,7 @@ input[type="button"]{
     top: 0px;
 }
 .color{
-    margin-left: 5px;
+    margin-left: 0.8px;
     position: relative;
     top: 2.8px;
 }

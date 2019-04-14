@@ -45,7 +45,7 @@ $(function(){
             data=data.sort();
             // console.log("data:======="+data);
             // console.log(data.length);
-            for(var i=0;i<data.length;i++){
+            for(var i=1;i<data.length;i++){// data[0]的顺序是错的 好奇怪 为什么
                 data[i]=data[i].replace("},","");
                 var rest=new Array();
                 rest=data[i].split(",");
@@ -234,8 +234,6 @@ $(function(){
     }
     
 //设置弹幕随机高度
-var highs=Array();
-highs[0]=0;//用来设置底部 顶部 弹幕的 不过鉴于DDL紧迫 弃暗投明（不是
 function sethigh(){
         var high=0;
         high=Math.round(Math.random()*95+18);
