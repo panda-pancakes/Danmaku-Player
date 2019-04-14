@@ -48,6 +48,9 @@ body{
 video{
     background-color: black;
 }
+#words{
+    width: 65px;
+}
 #attention_box{
     /* position: relative; */
     display: flex;
