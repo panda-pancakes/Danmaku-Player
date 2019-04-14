@@ -5,6 +5,7 @@ $(function(){
     date=now.getFullYear()+"/"+now.getMonth()+"/"+now.getDay()+"/"+now.getHours()+":"+now.getMinutes();
     var num=0;
     var clicktime = 3; 
+    $("#attention_box").hide();
     //var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php";
     var ws_url="ws://server.sforest.in:20480";
     player_onoff(); 
@@ -36,8 +37,9 @@ $(function(){
     }
     function loading() {
         var user = $("#user").val(); 
-        var words = $("#words").val();     
-        var isok=check();
+        var words = $("#words").val();
+        var isok =  check();
+        console.log(isok);     
         if (isok) {
             var ws = new WebSocket(ws_url); 
             ws.onopen = function() {
@@ -59,9 +61,9 @@ $(function(){
                     show_bullet(text);
                     ws.close();  
                 }
-                console.log("发送弹幕"); 
-                $("#attention").text("发送弹幕");
-                attention();
+                console.log("发送弹幕");
+                var msg = "弹幕发送成功";
+                attention(msg);
             }
             //发送弹幕
             // setTimeout(function(){
@@ -70,8 +72,8 @@ $(function(){
             //     }    
             // },5000*3);
         }else {
-            $("#attention").text("出了点小差错！");
-            attention(); 
+            var msg = "出了点小差错！";
+            attention(msg); 
         }
     }
     //显示或关闭弹幕
@@ -106,58 +108,66 @@ $(function(){
             },5000);
     }
     //显示提示
-    function attention() {
-        $("#attention_box").show(); 
+    function attention(msg) {
+        $("#attention_box").show();
+        $("#attention").text(msg); 
         setTimeout(function () {
             $("#attention_box").hide();
         }, 2333); 
     }
     //前端检查
     function check() {
-        var errcode = 222; 
+        var errcode = 222;
         function isBlank(str) {
-            return ( ! str || /^\s * $/.test(str)); 
+            return ( ! str || /^\s * $/.test(str));
         }//是否为空
         function check_uni(str) {
             var patt_illegal = new RegExp(/[\@\#\$\ % \^\ & \ *  {\}\:\\L\ < \ > \?}\'\"\\\/\b\f\n\r\t]/g);
             return patt_illegal.test(str);
         }//是否为字符？非法字符
         if(isBlank($("#user").val())){
-            $("#user").focus(function(){
-                // texting("#user");
-                // $("#user").scrollIntoView(alignWithTop);
-            });
+            // $("#user").focus(function(){
+            //     // texting("#user");
+            //     // $("#user").scrollIntoView(alignWithTop);
+            // });
+            $("#user").focus();
             errcode=233;//不能通过
-            attention();
+            var msg = "用户名为空";
+            attention(msg);
         }
-        if(check_uni($("#user").val())){
-            $("#user").focus(function(){
-                // texting("#user");
-                // $("#user").scrollIntoView(alignWithTop);
-            });
-            errcode=666;//不能通过
-            attention();
-        }else{
-            errcode=111;
+        else if(check_uni($("#user").val())){
+            // $("#user").focus(function(){
+            //     // texting("#user");
+            //     // $("#user").scrollIntoView(alignWithTop);
+            // });
+            $("#user").focus();
+            errcode = 666;//不能通过
+            var msg = "用户名填写格式不对";
+            attention(msg);
         }
-        if(isBlank($("#words").val())){
-            errcode=233;
-            $("#words").focus(function(){
-                // texting("#words");
-                // $("#words").scrollIntoView(alignWithTop);
-            });
-            attention();
+        else if(isBlank($("#words").val())){
+            errcode = 233;
+            // $("#words").focus(function(){
+            //     // texting("#words");
+            //     // $("#words").scrollIntoView(alignWithTop);
+            // });
+            $("#words").focus();
+            var msg = "弹幕为空，请填写弹幕内容";
+            attention(msg);
         }
-        if(check_uni($("#words").val())){
+        else if(check_uni($("#words").val())){
             errcode=666;
-            $("#words").focus(function(){
-                // $("#words").scrollIntoView(alignWithTop);
-            });
-            attention();
+            // $("#words").focus(function(){
+            //     // $("#words").scrollIntoView(alignWithTop);
+            // });
+            $("#words").focus();
+            var msg = "弹幕填写格式不正确，请正确填写弹幕";
+            attention(msg);
         }else{
             errcode=111;
         }
-        if(errcode==111){
+        console.log(errcode);
+        if(errcode == 111){
             $("#user").css({
                 opacity: 0.8
             })
@@ -165,6 +175,7 @@ $(function(){
         }else{
             return false;
         }
+        
     }
     
 //设置弹幕随机高度
