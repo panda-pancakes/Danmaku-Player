@@ -234,22 +234,30 @@ input[type="button"]{
     -webkit-animation: flying 20s;
     -webkit-animation-timing-function:ease;
     animation-fill-mode: forwards;
+    margin: 10px;
+    padding: 5px;
 }
 @keyframes flying{
     from{
         right: 15px;
+        margin: 10px;
     }
     to{
         right:  700px;
+        margin: 10px;
         opacity: 0;
     }
 }
 @-webkit-keyframes flying{
     from{
         right: 15px;
+        margin: 10px;
+
     }
     to{
         right:  1000px;
+        margin: 10px;
+
         opacity: 0;
     }
 }

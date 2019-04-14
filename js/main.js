@@ -5,6 +5,9 @@ $(function(){
     date=now.getFullYear()+"/"+now.getMonth()+"/"+now.getDay()+"/"+now.getHours()+":"+now.getMinutes();
     var num=0;
     var clicktime = 3; 
+    var users=Array();
+    var dates=Array();
+    var comments=Array();
     //var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php";
     var ws_url="ws://server.sforest.in:20480";
     player_onoff(); 
@@ -24,7 +27,39 @@ $(function(){
             data = evt.data; 
             data=JSON.parse(data);
             console.log(data);
-            text = data.data[0].comment;
+            data=data['data'];
+            data=data.replace("[","");
+            data=data.replace("]","");
+            data=data.replace("/","");
+            data=data.replace(/\"/g,"");
+            data=data.replace("{","");
+            data=JSON.stringify(data);
+            data=JSON.parse(data);
+            data=data.split("{");
+            console.log("data:======="+data);
+            console.log(data.length);
+            for(var i=0;i<data.length;i++){
+                data[i]=data[i].replace("},","");
+                var rest=new Array();
+                rest=data[i].split(",");
+                // rest=JSON.stringify(rest);
+                // rest=JSON.parse(rest);
+                // console.log("============"+rest[2]);
+                if(rest[0].replace("user:","")!=null){
+                    users[i]=rest[0].replace("user:","");
+                }else{
+                    users[i]=rest[0].replace("user:","失去姓名的用户");
+                }
+                if(rest[1].replace("comment:","")!=null){
+                    comments[i]=rest[1].replace("comment:","");
+                }else{
+                    comments[i]=rest[1].replace("comment:","nothing");
+                }
+                dates[i]=rest[2].replace("time:","");
+                others_words(users[i],comments[i],new Date(dates[i]*1000));
+                go_bullet(comments[i],"all");
+                // console.log(i+"======="+users[i]+"say:====="+comments[i]);
+            }
             ws.close();
         }
         //收集服务器上的弹幕
@@ -55,7 +90,7 @@ $(function(){
                     data = JSON.parse(data);
                     console.log(data.data[0].comment);
                     text = data.data[0].comment;
-                    go_bullet(text);
+                    go_bullet(text,"you");
                     show_bullet(text);
                     ws.close();  
                 }
@@ -99,11 +134,11 @@ $(function(){
         $(str).css( {
             "margin-bottom":"200px"
         }); 
-        setTimeout(function(){
-            $(str).css({
-                "margin-bottom":"inherit"
-            });
-            },5000);
+        // setTimeout(function(){
+        //     $(str).css({
+        //         "margin-bottom":"inherit"
+        //     });
+        //     },5000);
     }
     //显示提示
     function attention() {
@@ -171,12 +206,13 @@ $(function(){
 var highs=Array();
 highs[0]=0;//用来设置底部 顶部 弹幕的 不过鉴于DDL紧迫 弃暗投明（不是
 function sethigh(){
-        var high=Math.random()*100+35;
+        var high=Math.random()*300+35;
         return high;
     }
 
 //插入弹幕
-function go_bullet(text) {
+function go_bullet(text,method) {
+    if(method=="you"){
     var user = $("#user").val(); 
     if(user==undefined||user==""){
         user="一位不愿意透露姓名的用户";
@@ -186,17 +222,60 @@ function go_bullet(text) {
     bulletname = "bulletc[" + num + "]";
     say_a_word(user,text);
     console.log("写进评论");
-    var color = $("#color").val();
-    var size = $("#size").val();
-    var opacity = $("#opacity").val();
+    var colorname = $("#color").val();
+    var sizename = $("#size").val();
+    var opacityname = $("#opacity").val();
     // font_style(bulletname);
     // $(containername).css({
     //     "top":sethigh(),
     // })
     $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
-    +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+color+";size:"+size+";opacity:"+opacity+";"
+    +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+colorname+";size:"+sizename+";opacity:"+opacityname+";"
     +">" + text +"</div>"
     +"</div>");//包含在内
+}else if(method=="all"){
+    if(user==undefined||user==""){
+        user="一位不愿意透露姓名的用户";
+    }
+    num=num++;
+    containername = "container[" + num + "]";
+    bulletname = "bulletc[" + num + "]";
+    var color=Array();
+    var display=Array();
+    var size=Array();
+    function setstyle(){
+        color[0]="red";
+        color[1]="yellow";         
+        color[2]="green";
+        color[3]="blue";
+        color[4]="purple";
+        color[5]="white";
+        display[0]="1";
+        display[1]="0.8";
+        display[2]="0.7";
+        display[3]="0.5";
+        display[4]="0.4";
+        display[5]="0.6";
+        size[0]="10px";
+        size[1]="75px";
+        size[2]="30px";
+        size[3]="25px";
+        size[4]="40px";
+        size[5]="15px";
+    }
+    setstyle();
+    colorname=color[random_style()];
+    opacityname=display[random_style()];
+    sizename=size[random_style()];
+    $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
+    +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+colorname+";size:"+sizename+";opacity:"+opacityname+";"
+    +">" + text +"</div>"
+    +"</div>");//包含在内
+}
+}
+function random_style(){
+    var i=Math.random()*6;
+    return i;
 }
 //插入弹幕时发表评论
 function say_a_word(user,str){
@@ -207,6 +286,16 @@ function say_a_word(user,str){
     +"<div class='text'>"+str //评论内容
     +"</div></div>");
 }
+//服务器发回的评论和弹幕
+function others_words(user,str,time){
+    $("#comments").append("<div class='comment'>"+
+    "<img class='imghead'  id='"+user+"' src='img/icon_sample.png'>"
+    +"<div class='username'>"+user+"</div>" //用户名
+    +"<div class='time'>"+time+"</div>" //时间
+    +"<div class='text'>"+str //评论内容
+    +"</div></div>");
+}
+
 //按钮设置
 $("#send_btn").bind("click", function () {
     loading();
@@ -225,8 +314,6 @@ $("#setting").click(function(){
 //评论区
 function show_bullet(data) {
     for (var i = 0; i < data.sum; i++) {
-        //哇这个明显写错了 danmaku_container是用来在视频上显示弹幕 的  评论区要专门做呀
-        // $(".danmaku_container").append("<div class='bullet'" + "id=bullet[" + num + "]>" + data.text + "</div>");
         bulletname = "#bulletc[" + num + "]";
         font_style(bulletname);
     }
