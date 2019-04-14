@@ -9,7 +9,6 @@ $(function(){
     var dates=Array();
     var comments=Array();
     $("#attention_box").hide();
-    //var ws_url="ws://http://203.195.221.189/Danmaku-Player/php/ws_server.php";
     var ws_url="ws://server.sforest.in:20480";
     player_onoff(); 
     //弹幕开关
@@ -27,7 +26,7 @@ $(function(){
         ws.onmessage = function(evt) {
             data = evt.data; 
             data=JSON.parse(data);
-            console.log(data);
+            // console.log(data);
             data=data['data'];
             data=data.replace("[","");
             data=data.replace("]","");
@@ -37,8 +36,8 @@ $(function(){
             data=JSON.stringify(data);
             data=JSON.parse(data);
             data=data.split("{");
-            console.log("data:======="+data);
-            console.log(data.length);
+            // console.log("data:======="+data);
+            // console.log(data.length);
             for(var i=0;i<data.length;i++){
                 data[i]=data[i].replace("},","");
                 var rest=new Array();
@@ -46,23 +45,30 @@ $(function(){
                 // rest=JSON.stringify(rest);
                 // rest=JSON.parse(rest);
                 // console.log("============"+rest[2]);
-                if(rest[0].replace("user:","")!=null){
-                    users[i]=rest[0].replace("user:","");
+                rest=rest.sort();
+                if(rest[2].replace("user:","")!=null){
+                    users[i]=rest[2].replace("user:","");
                 }else{
-                    users[i]=rest[0].replace("user:","失去姓名的用户");
+                    users[i]=rest[2].replace("user:","失去姓名的用户");
                 }
-                if(rest[1].replace("comment:","")!=null){
-                    comments[i]=rest[1].replace("comment:","");
+                if(rest[0].replace("comment:","")!=null){
+                    comments[i]=rest[0].replace("comment:","");
                 }else{
-                    comments[i]=rest[1].replace("comment:","nothing");
+                    comments[i]=rest[0].replace("comment:","nothing");
                 }
-                dates[i]=rest[2].replace("time:","");
-                others_words(users[i],comments[i],new Date(dates[i]*1000));
-                go_bullet(comments[i],"all");
+                dates[i]=rest[1].replace("time:","");
+                if(clicktime==2){
+                    others_words(users[i],comments[i],new Date(dates[i]*1000));
+                }
+                clicktime=3;
                 // console.log(i+"======="+users[i]+"say:====="+comments[i]);
             }
-            ws.close();
+            console.log(users[1]);
+            for(var i=0;i<users.length;i++){
+                go_bullet(comments[i],"all");    
+            }
         }
+
         //收集服务器上的弹幕
         // setTimeout(function(){
         //     ws.onclose = function() {
@@ -112,6 +118,7 @@ $(function(){
         //     attention(msg); 
         // }
     }
+
     //显示或关闭弹幕
     function player_onoff() {
         $("#show").click(function () {
@@ -218,7 +225,7 @@ $(function(){
 var highs=Array();
 highs[0]=0;//用来设置底部 顶部 弹幕的 不过鉴于DDL紧迫 弃暗投明（不是
 function sethigh(){
-        var high=Math.random()*300+35;
+        var high=Math.random()*200+35;
         return high;
     }
 
@@ -313,8 +320,14 @@ $("#send_btn").bind("click", function () {
     loading();
 })
 $("#freshen_btn").click(function () {
-    showall();
-    $(".danmaku_container").show();
+    if(clicktime=3){
+        clicktime=2
+        showall();
+        $(".danmaku_container").show();    
+    }
+    setTimeout(function(){
+        clicktime=3
+    },2000);
 })
 $("#setting_box").hide();
 $("#setting").click(function(){
