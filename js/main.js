@@ -27,9 +27,13 @@ $(function(){
             data = evt.data; 
             data=JSON.parse(data);
             // console.log(data);
-            data=data['data'];
-            data=data.replace("[","");
-            data=data.replace("]","");
+            data=data['data'].toString();
+            // if(data=data.replace("[","")!=null){
+            //     data=data.replace("[","");
+            // }
+            // if(data=data.replace("]","")!=null){
+            //     data=data.replace("]","");
+            // }
             data=data.replace("/","");
             data=data.replace(/\"/g,"");
             data=data.replace("{","");
@@ -57,10 +61,12 @@ $(function(){
                     comments[i]=rest[0].replace("comment:","nothing");
                 }
                 dates[i]=rest[1].replace("time:","");
-                if(clicktime==2){
-                    others_words(users[i],comments[i],new Date(dates[i]*1000));
-                }
-                clicktime=3;
+                dates[i]=new Date(dates[i]*1000).toString();
+                dates[i]=dates[i].replace("GMT+0800 (中国标准时间)","");
+                // if(clicktime==2){
+                    others_words(users[i],comments[i],dates[i]);
+                // }
+                // clicktime=3;逻辑错了 不管怎样 先放出
                 // console.log(i+"======="+users[i]+"say:====="+comments[i]);
             }
             console.log(users[1]);
@@ -225,7 +231,7 @@ $(function(){
 var highs=Array();
 highs[0]=0;//用来设置底部 顶部 弹幕的 不过鉴于DDL紧迫 弃暗投明（不是
 function sethigh(){
-        var high=Math.random()*200+35;
+        var high=Math.random()*100+22;
         return high;
     }
 
