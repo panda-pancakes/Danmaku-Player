@@ -3,8 +3,8 @@ body{
     padding: 0;
     background-color: #545353;
 }
-/*清空＋设置背景色*/
-input[type="image"]{
+/*清空＋设置背景色input[type="image"]*/
+.btn{
     position: relative;
     top: 8.5px;
 }
@@ -18,7 +18,7 @@ input[type="image"]{
     width: -webkit-fill-available;
     white-space: nowrap;
     padding-left: 1px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 #top{
     padding: 5px;
@@ -65,10 +65,14 @@ video{
 }
 #size{
     width: 60px;
+    position: relative;
+    top: -8px;
 }
 /*滑块*/
 select{
-    background-color: ghostwhite;
+    background-color: gray;
+    opacity: 0.8;
+    color: white;
     border-radius: 3.4em;
     padding-left: 5px;
     font-size: 10px;
@@ -109,17 +113,26 @@ input[type="checkbox"]{
     top: 5px;
     -webkit-appearance: radio;
 }
-
+#send_btn{
+    height: 22px;
+}
 #textbox,.setting{
+    position: relative;
+    top: -4px;
+    background-image: url("../img/pic/background1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     text-align: center;
     color: dimgray;
 }
 .setting{
-    text-align: start;
-    padding-left: 30px;
+    text-align: left;
+    margin: 0px;
+    padding-left: 15px;
+    padding-bottom: 12px;
 }
 #textbox{
-    margin-bottom: 15px;
+    padding-bottom: 12px;
 }
 #user{
     width: 45px;
@@ -191,6 +204,17 @@ input[type="button"]{
     font-family: "微软雅黑";
     color: darkslategray;
     font-size: 12px;
+}
+.style{
+    margin-left: 5px;
+    top: 0px;
+}
+.color{
+    margin-left: 5px;
+    top: 2.5px;
+}
+#color{
+    display: none;
 }
 .danmaku_container{
     position: absolute;

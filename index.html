@@ -37,22 +37,31 @@
     <div class="navigation">
         <div class="horizontal" id="bottom">
             <div class="setting" id="setting_box">
-            <label for="color">颜色</label>
-            <select name="color" id="color"></select>        
-            <label for="size">大小</label>
+            <input type="image" class="style" id="bottom_btn" src="img/pic/bottom.png">
+            <input type="image" class="style" id="roll_btn" src="img/pic/roll.png">
+            <input type="image" class="style" id="top_btn" src="img/pic/top.png">        
+            <label for="size" style="margin-left:25px;position: relative;top: -7px;">字号</label>
             <select name="size" id="size"></select>
             <div class="opacity">
                 <label for="opacity">透明度</label>
                 <select name="opacity" id="opacity"></select>
                 <!-- <div id="slider"></div>     -->
+            <label for="color" style="margin-left:15px;">颜色</label>
+            <select name="color" id="color"></select>        
+            <input type="image" class="color" id="red">
+            <input type="image" class="color" id="yellow">
+            <input type="image" class="color" id="green">
+            <input type="image" class="color" id="blue">
+            <input type="image" class="color" id="purple">
+            <input type="image" class="color" id="white">
             </div>        
             </div>
             <div id="textbox">
             <input type="text" id="user" placeholder="用户名">
             <input type="text" id="words"  placeholder="发送一条弹幕">
-            <input type="image" src="img/btn/send.png" id="send_btn" value="发送">
-            <input type="image" src="img/btn/freshen.png" id="freshen_btn" value="刷新">
-            <input type="image" id="setting" value="设置" src="img/btn/setting.png">
+            <input type="image"  class="btn"src="img/btn/send.png" id="send_btn" value="发送">
+            <input type="image" class="btn" src="img/btn/freshen.png" id="freshen_btn" value="刷新">
+            <input type="image" class="btn" id="setting" value="设置" src="img/btn/setting.png">
             <input type="checkbox" name="show" id="show" alt="o">
             <label id="label1"for="show">开关</label>
             </div>
