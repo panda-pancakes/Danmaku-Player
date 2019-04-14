@@ -71,10 +71,11 @@ $(function(){
             //         console.log("关闭ws"); 
             //     }    
             // },5000*3);
-        }else {
-            var msg = "出了点小差错！";
-            attention(msg); 
-        }
+            }
+            //else {
+        //     var msg = "出了点小差错！";
+        //     attention(msg); 
+        // }
     }
     //显示或关闭弹幕
     function player_onoff() {
