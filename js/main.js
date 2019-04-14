@@ -110,7 +110,7 @@ $(function(){
     //显示提示
     function attention(msg) {
         $("#attention_box").show();
-        $("#attention").text(msg); 
+        $("#attention_box").text(msg); 
         setTimeout(function () {
             $("#attention_box").hide();
         }, 2333); 
