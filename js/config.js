@@ -9,19 +9,29 @@ $(function (){
     var color=Array();
     var display=Array();
     var size=Array();
-    function setstyle(){
+    function setcolor(){
         color[0]="red";
         color[1]="yellow";         
         color[2]="green";
         color[3]="blue";
         color[4]="purple";
         color[5]="white";
+        for (var i = 0; i <= 5; i++) {
+            $("#color").append("<option value=" + color[i] + ">" + color[i] + "</option>");
+            //颜色选项
+        }}
+    function setopacity(){
         display[0]="1";
         display[1]="0.8";
         display[2]="0.7";
         display[3]="0.5";
         display[4]="0.4";
         display[5]="0.2";
+        for (var i = 0; i <= 5; i++) {
+        $("#opacity").append("<option value=" + display[i] +">" + display[i] + "</option>");}
+        //透明度
+    }
+    function setsize(){
         size[0]="50px";
         size[1]="25px";
         size[2]="20px";
@@ -29,14 +39,12 @@ $(function (){
         size[4]="10px";
         size[5]="5px";
         for (var i = 0; i <= 5; i++) {
-            $("#color").append("<option value=" + color[i] + ">" + color[i] + "</option>");
-            //颜色选项
-            $("#size").append("<option value=" + size[i] + ">" + size[i] + "</option>");
-            //字体大小
-            $("#opacity").append("<option value=" + display[i] +">" + display[i] + "</option>");
-            //透明度
+         $("#size").append("<option value=" + size[i] + ">" + size[i] + "</option>");}
+         //字体大小
     }
-}
+    $("#color").change(setcolor());
+    $("#opacity").change(setopacity());
+    $("#size").change(setsize());
 $("#red").attr("src","img/pic/red.png");
 $("#yellow").attr("src","img/pic/yellow.png");
 $("#green").attr("src","img/pic/green.png");
@@ -44,7 +52,6 @@ $("#blue").attr("src","img/pic/blue.png");
 $("#white").attr("src","img/pic/white.png");
 $("#purple").attr("src","img/pic/purple.png");
 
-    $("select").change(setstyle());
     function click_color(){
         var colorname=Array();
         for(var i=0;i<=5;i++){
@@ -68,7 +75,7 @@ $("#purple").attr("src","img/pic/purple.png");
                     "border": "none"
                 });
                 $("#color").empty();
-                $("select").change(setstyle());
+                $("#color").change(setcolor());
                 clicktime=22;
                 return false;
             }
