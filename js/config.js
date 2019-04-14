@@ -1,8 +1,8 @@
 $(function (){
     var name = $("#video_name").val();
-    // var src1 = "http://vodkgeyttp8.vod.126.net/cloudmusic/7ee3/mv/a104/181251ac9d84d0f40c5fa2d8fc263e7e.mp4?wsSecret=002f44c3adb92a5bf6430859fb524b75&wsTime=1554720592";
-    // $("video").attr("src",src1);
-    // $("video").load();//没有用
+    var src1 = "http://vodkgeyttp8.vod.126.net/cloudmusic/7ee3/mv/a104/181251ac9d84d0f40c5fa2d8fc263e7e.mp4?wsSecret=002f44c3adb92a5bf6430859fb524b75&wsTime=1554720592";
+    $("video").attr("src",src1);
+    // $("video").play();
     $("#video_name").text("SEARCH");
     // var viedo_src = $("#video").attr("src","video/");
     // var danmaku;
