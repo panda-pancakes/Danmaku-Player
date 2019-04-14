@@ -16,6 +16,8 @@ $(function(){
 
     //加载弹幕  用于刷新按钮
     function showall(){
+        $("#attention_box").text("正在载入……");
+        attention();
         var ws = new WebSocket(ws_url); 
         ws.onopen = function() {
             var package =  {
@@ -40,6 +42,7 @@ $(function(){
             data=JSON.stringify(data);
             data=JSON.parse(data);
             data=data.split("{");
+            data=data.sort();
             // console.log("data:======="+data);
             // console.log(data.length);
             for(var i=0;i<data.length;i++){
@@ -70,8 +73,11 @@ $(function(){
                 // console.log(i+"======="+users[i]+"say:====="+comments[i]);
             }
             console.log(users[1]);
-            for(var i=0;i<users.length;i++){
-                go_bullet(comments[i],"all");    
+            var i=Math.round(Math.random()*100);
+            var n=i+15;
+            for(i;i<n;i++){
+                go_bullet(comments[i],"all");
+
             }
         }
 
@@ -231,7 +237,8 @@ $(function(){
 var highs=Array();
 highs[0]=0;//用来设置底部 顶部 弹幕的 不过鉴于DDL紧迫 弃暗投明（不是
 function sethigh(){
-        var high=Math.random()*100+22;
+        var high=0;
+        high=Math.round(Math.random()*95+18);
         return high;
     }
 
@@ -254,9 +261,13 @@ function go_bullet(text,method) {
     // $(containername).css({
     //     "top":sethigh(),
     // })
+    // highs[num]=sethigh();
+    // if((highs[num]-highs[random_style()])<=20){
+    //     highs[num]=sethigh()+50;
+    // }
     $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
     +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+colorname+";size:"+sizename+";opacity:"+opacityname+";"
-    +">" + text +"</div>"
+    +"margin:20px;"+">" + text +"</div>"
     +"</div>");//包含在内
 }else if(method=="all"){
     if(user==undefined||user==""){
@@ -294,7 +305,7 @@ function go_bullet(text,method) {
     sizename=size[random_style()];
     $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
     +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+colorname+";size:"+sizename+";opacity:"+opacityname+";"
-    +">" + text +"</div>"
+    +"margin:20px;"+">" + text +"</div>"
     +"</div>");//包含在内
 }
 }

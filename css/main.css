@@ -225,24 +225,59 @@ input[type="button"]{
     position: absolute;
     top: 30px;
     width: -webkit-fill-available;
-    height: 200px;
+    height: 20px;
+    margin: 20px;
+    display: block;
 }
 .bullet{
     background: none;
     position: absolute;
     color: white;
     font-size: x-small;
-    animation: flying 20s;
+    animation: flying1 25s;
     animation-timing-function:ease;
-    -webkit-animation: flying 20s;
+    -webkit-animation: flying1 25s;
     -webkit-animation-timing-function:ease;
     animation-fill-mode: forwards;
+    display: block;
     margin: 10px;
     padding: 5px;
 }
-@keyframes flying{
-    from{
+@keyframes flying1{
+    from{display: block;
+        margin: 10px;
+        padding: 5px;
         right: 15px;
+        margin: 10px;
+    }
+    to{display: block;
+        margin: 10px;
+        padding: 5px;
+        right:  1000px;
+        margin: 10px;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes flying1{
+    from{
+        display: block;
+    margin: 10px;
+    padding: 5px;
+        right: 15px;
+        margin: 10px;
+
+    }
+    to{display: block;
+        margin: 10px;
+        padding: 5px;
+        right:  1000px;
+        margin: 10px;
+        opacity: 0;
+    }
+}
+@keyframes flying2{
+    from{
+        right: 60px;
         margin: 10px;
     }
     to{
@@ -251,16 +286,36 @@ input[type="button"]{
         opacity: 0;
     }
 }
-@-webkit-keyframes flying{
+@-webkit-keyframes flying2{
     from{
-        right: 15px;
+        right: 60px;
         margin: 10px;
-
     }
     to{
-        right:  1000px;
+        right:  700px;
         margin: 10px;
-
+        opacity: 0;
+    }
+}
+@keyframes flying3{
+    from{
+        right: 4px;
+        margin: 10px;
+    }
+    to{
+        right:  700px;
+        margin: 10px;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes flying3{
+    from{
+        right:4px;
+        margin: 10px;
+    }
+    to{
+        right:  700px;
+        margin: 10px;
         opacity: 0;
     }
 }
