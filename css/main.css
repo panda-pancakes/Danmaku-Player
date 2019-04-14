@@ -207,11 +207,13 @@ input[type="button"]{
 }
 .style{
     margin-left: 5px;
+    position: relative;
     top: 0px;
 }
 .color{
     margin-left: 5px;
-    top: 2.5px;
+    position: relative;
+    top: 2.8px;
 }
 #color{
     display: none;
