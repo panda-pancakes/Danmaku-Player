@@ -54,8 +54,8 @@ video{
     justify-content:center;
     align-items:center;
     color: white;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 10px;
+    padding: 8px;
     display: flex;
     top: -100px;
 }
@@ -63,6 +63,7 @@ video{
 #quit_btn{
     position: absolute;
     right: 0%;
+    top: 10px;
     margin-right: 5px;
 }
 #size{
@@ -112,8 +113,8 @@ input[type="checkbox"]{
     margin: 0;
     position: relative;
     opacity: 0.7;
-    top: 5px;
-    -webkit-appearance: radio;
+    top: 6px;
+    -webkit-appearance: checkbox;
 }
 #send_btn{
     height: 22px;
@@ -183,11 +184,18 @@ input[type="checkbox"]{
 #setting{
     top: 6.7px;
 }
+#setstyle{
+    display: block;
+    height: 15px;
+}
 label{
     color: white;
     font-family: "微软雅黑";
-    /* font-size: 11px; */
+    font-size: 11px;
+    opacity: 0.7;
+    padding-left: 4px;
 }
+
 #label1{
     position: relative;
     top: 3px;
@@ -253,7 +261,7 @@ input[type="button"]{
     to{display: block;
         margin: 10px;
         padding: 5px;
-        right:  1000px;
+        right:  1500px;
         margin: 10px;
         opacity: 0;
     }
@@ -270,7 +278,7 @@ input[type="button"]{
     to{display: block;
         margin: 10px;
         padding: 5px;
-        right:  1000px;
+        right:  1500px;
         margin: 10px;
         opacity: 0;
     }
