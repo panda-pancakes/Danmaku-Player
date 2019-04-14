@@ -21,7 +21,7 @@ body{
     /* margin-right: 10px; */
 }
 #top{
-    padding: 5px;
+    padding: 1px;
     top: 0%;
 }
 #bottom{
@@ -49,7 +49,8 @@ video{
     background-color: black;
 }
 #words{
-    width: 65px;
+    /* width: 65px; */
+    width: auto;
 }
 #attention_box{
     /* position: relative; */
@@ -66,7 +67,7 @@ video{
 #quit_btn{
     position: absolute;
     right: 0%;
-    top: 10px;
+    top: 7px;
     margin-right: 5px;
 }
 #size{
@@ -105,6 +106,9 @@ select{
 input[type="text"]{
     background-color: #efecec;
     border-radius: 4em;
+    position: relative;
+    top: 0.8px;
+    padding-top: 3px;
     padding-left: 5px;
     padding-top: 3px;
     padding-bottom: 3.6px;
@@ -139,6 +143,9 @@ input[type="checkbox"]{
 }
 #textbox{
     padding-bottom: 12px;
+    width: -webkit-fill-available;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 #user{
     width: 45px;
@@ -202,8 +209,10 @@ label{
 #label1{
     position: relative;
     top: 3px;
-    font-size: x-small;
+    font-size: 1px;
     opacity: 0.3;
+    right: 9.2px;
+
 }
 video,source{
     height: auto;
