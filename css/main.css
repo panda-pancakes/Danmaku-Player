@@ -271,12 +271,13 @@ input[type="button"]{
     position: absolute;
     color: white;
     font-size: x-small;
-    animation: flying1 25s;
-    animation-timing-function:ease;
-    -webkit-animation: flying1 25s;
-    -webkit-animation-timing-function:ease;
+    animation: flying1 20s;
+    animation-timing-function:cubic-bezier(1.475, 0.585, 0.52, 0.475);
+    -webkit-animation: flying1 20s;
+    -webkit-animation-timing-function:cubic-bezier(1.475, 0.585, 0.52, 0.475);
     animation-fill-mode: forwards;
     display: block;
+    white-space: nowrap;
     margin: 10px;
     padding: 5px;
     /* display: flex;
@@ -284,78 +285,22 @@ input[type="button"]{
     flex-direction: column; */
 }
 @keyframes flying1{
-    from{display: block;
-        margin: 10px;
-        padding: 5px;
-        right: 15px;
-        margin: 10px;
+    from{
+        left: 100%;
+        opacity: 1;
     }
-    to{display: block;
-        margin: 10px;
-        padding: 5px;
-        right:  1500px;
-        margin: 10px;
+    to{
+        left: 0%;
         opacity: 0;
     }
 }
 @-webkit-keyframes flying1{
     from{
-        display: block;
-    margin: 10px;
-    padding: 5px;
-        right: 15px;
-        margin: 10px;
-
-    }
-    to{display: block;
-        margin: 10px;
-        padding: 5px;
-        right:  1500px;
-        margin: 10px;
-        opacity: 0;
-    }
-}
-@keyframes flying2{
-    from{
-        right: 60px;
-        margin: 10px;
+        left: 100%;
+        opacity: 1;
     }
     to{
-        right:  700px;
-        margin: 10px;
-        opacity: 0;
-    }
-}
-@-webkit-keyframes flying2{
-    from{
-        right: 60px;
-        margin: 10px;
-    }
-    to{
-        right:  700px;
-        margin: 10px;
-        opacity: 0;
-    }
-}
-@keyframes flying3{
-    from{
-        right: 4px;
-        margin: 10px;
-    }
-    to{
-        right:  700px;
-        margin: 10px;
-        opacity: 0;
-    }
-}
-@-webkit-keyframes flying3{
-    from{
-        right:4px;
-        margin: 10px;
-    }
-    to{
-        right:  700px;
-        margin: 10px;
+        left: 0%;
         opacity: 0;
     }
 }
