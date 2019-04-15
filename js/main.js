@@ -73,7 +73,8 @@ $(function(){
                 // console.log(i+"======="+users[i]+"say:====="+comments[i]);
             }
             console.log(users[1]);
-            var i=Math.round(Math.random()*100);
+            // var i=Math.round(Math.random()*100);
+            var i = 0;
             var n=i+15;
             for(i;i<n;i++){
                 go_bullet(comments[i],"all");
