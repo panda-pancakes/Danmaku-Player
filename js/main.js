@@ -30,7 +30,7 @@ $(function(){
         ws.onmessage = function(evt) {
             data = evt.data; 
             data=JSON.parse(data);
-            // console.log(data);
+            //console.log(data.data);
             data=data['data'].toString();
             // if(data=data.replace("[","")!=null){
             //     data=data.replace("[","");
@@ -76,7 +76,6 @@ $(function(){
                 // clicktime=3;逻辑错了 不管怎样 先放出
                 // console.log(i+"======="+users[i]+"say:====="+comments[i]);
             }
-            console.log(users[1]);
             // var i=Math.round(Math.random()*100);
             var i = 0;
             var n=users.length;
@@ -116,6 +115,7 @@ $(function(){
                 ws.onmessage = function(evt) {
                     data = evt.data; 
                     data = JSON.parse(data);
+                    console.log(data);
                     console.log(data.data[0].comment);
                     text = data.data[0].comment;
                     go_bullet(text,"you");
