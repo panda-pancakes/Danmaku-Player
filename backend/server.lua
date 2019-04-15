@@ -1,17 +1,63 @@
+----------------------------------------------
+-- Danmaku Player Backend
+-- Au: SJoshua
+----------------------------------------------
+
+-- init
+
 local websocket = require("websocket")
 local socket = require("socket")
 local cjson = require("cjson")
+local sqlite3_driver = require("luasql.sqlite3")
+local sqlite3_env = sqlite3_driver.sqlite3()
 
-local danmaku = {}
+dofile("config.lua")
 
 local ws
 local hold = {}
 local link = {}
 local block = {}
 
+-----------------------------------------------
+
+local danmaku = {
+	init = function()
+		local con = sqlite3_env:connect(config.db)
+		con:execute[[CREATE TABLE danmaku (time, offset, user, comment);]]
+		con:close()
+	end,
+    insert = function(t)
+        local con = sqlite3_env:connect(config.db)
+        con:execute(("INSERT INTO danmaku (time, offset, user, comment) VALUES (%d, %d, '%s', '%s');"):format(t.time, t.offset, con:escape(t.user), con:escape(t.comment)))
+        con:close()
+    end,
+    get = function()
+        local con = sqlite3_env:connect(config.db)
+        local cur = con:execute("SELECT time, offset, user, comment FROM danmaku;")
+        local ret = {}
+        repeat
+            local t, o, u, c = cur:fetch()
+            if t then
+                table.insert(ret, {time = t, offset = o, user = u, comment = c})
+            end
+        until not t
+        cur:close()
+        con:close()
+        return ret
+    end
+}
+
 function logprint(...)
 	io.write(os.date(), " | ")
 	print(...)
+end
+
+function flogprint(...)
+	local f = io.open(config.log, "a")
+	f:write(os.date(), " | ")
+	f:write(...)
+	f:write("\n")
+	f:close()
 end
 
 function register(s) 
@@ -35,20 +81,10 @@ function unregister(s)
 end
 
 function load()
-	local f = io.open("database", "r")
-	danmaku = cjson.decode(f:read("*a")) or {}
-	f:close()
-
 	local f = io.open("block", "r")
 	for line in f:lines() do
 		block[line] = true
 	end
-	f:close()
-end
-
-function save()
-	local f = io.open("database", "w")
-	f:write(cjson.encode(danmaku))
 	f:close()
 end
 
@@ -73,7 +109,7 @@ end
 
 hook = {
 	request_all = function(ws, msg)
-		send(ws, "danmaku", cjson.encode(danmaku))
+		send(ws, "danmaku", cjson.encode(danmaku.get()))
 	end,
 	new_comment = function(ws, msg)
 		msg.user = msg.user or "Anonymous"
@@ -83,9 +119,11 @@ hook = {
 		if type(msg.time) ~= "number" then
 			return send(ws, "error", "invaild time")
 		end
-		local t = {time = msg.time, comment = filter(msg.comment), user = msg.user}
-		table.insert(danmaku, t)
-		save()
+		if type(msg.offset) ~= "number" then
+			return send(ws, "error", "invaild offset")
+		end
+ 		local t = {time = math.floor(msg.time), offset = math.floor(msg.offset), comment = filter(msg.comment), user = msg.user}
+		danmaku.insert(t)
 		broadcast("danmaku", {t})
 	end
 }
@@ -107,9 +145,11 @@ end
 function main()
 	logprint("Link start.")
 
-	ws = websocket.bind("localhost", "8080")
+	ws = websocket.bind(config.addr, config.port)
 	hold = {}
 	link = {}
+
+	danmaku.init()
 
 	logprint("register: server client (" .. ws:socket() .. ")")
 
@@ -155,4 +195,7 @@ function main()
 	logprint("Server terminated.")
 end
 
-main()
+while true do
+	local _, err = pcall(main)
+	flogprint(err)
+end
