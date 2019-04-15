@@ -74,9 +74,9 @@ video{
     margin-right: 5px;
 }
 #size{
-    width: 60px;
+    /* width: 60px; */
     position: relative;
-    top: -8px;
+    /* top: -8px; */
 }
 /*滑块*/
 select{
@@ -141,7 +141,7 @@ input[type="checkbox"]{
 .setting{
     text-align: left;
     margin: 0px;
-    padding-left: 8px;
+    padding-left: 15px;
     padding-bottom: 12px;
 }
 #textbox{
@@ -238,8 +238,10 @@ input[type="button"]{
 }
 .color{
     margin-left: 0.8px;
+    margin-right: 5px;
     position: relative;
-    top: 2.8px;
+    top: 5px;
+    left: 5px;
 }
 #color{
     display: none;
@@ -249,9 +251,11 @@ input[type="button"]{
     position: absolute;
     top: 30px;
     width: -webkit-fill-available;
-    height: 20px;
-    margin: 20px;
+    height: 100px;
+    margin: 5px;
     display: block;
+    overflow: hidden;
+
     /* flex-wrap: wrap;
     flex-direction: column; */
 
@@ -262,6 +266,7 @@ input[type="button"]{
     display: -webkit-flex;
 } */
 .bullet{
+    overflow: hidden;
     background: none;
     position: absolute;
     color: white;

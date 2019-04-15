@@ -18,12 +18,14 @@ $(function(){
     function showall(){
         $("#attention_box").text("正在载入……");
         attention();
-        var ws = new WebSocket(ws_url); 
+        var ws = new WebSocket(ws_url);
+        if($("#words")!=""){
         ws.onopen = function() {
             var package =  {
                 "method":"request_all",
             }
             ws.send(JSON.stringify(package)); 
+        }
         }
         ws.onmessage = function(evt) {
             data = evt.data; 
@@ -66,8 +68,10 @@ $(function(){
                 dates[i]=rest[1].replace("time:","");
                 dates[i]=new Date(dates[i]*1000).toString();
                 dates[i]=dates[i].replace("GMT+0800 (中国标准时间)","");
+                var commentname="comment["+users[i]+"/"+dates[i]+"]'";
                 // if(clicktime==2){
                     others_words(users[i],comments[i],dates[i]);
+                    dele_the_same(commentname);
                 // }
                 // clicktime=3;逻辑错了 不管怎样 先放出
                 // console.log(i+"======="+users[i]+"say:====="+comments[i]);
@@ -75,10 +79,11 @@ $(function(){
             console.log(users[1]);
             // var i=Math.round(Math.random()*100);
             var i = 0;
-            var n=i+15;
+            var n=users.length;
             for(i;i<n;i++){
-                go_bullet(comments[i],"all");
-
+                if(users[i]!=undefined){
+                    go_bullet(comments[i],"all");
+                }
             }
         }
 
@@ -137,7 +142,8 @@ $(function(){
         $("#show").click(function () {
             if (clicktime == 3 || clicktime == 0) {
                 clicktime = 1; 
-                console.log("关闭弹幕"); 
+                console.log("关闭弹幕"); //关闭弹幕时清除节点？ 试试看
+
                 $("#attention").text("关闭弹幕");
                 attention();
                 $(".danmaku_container").hide(); 
@@ -236,9 +242,15 @@ $(function(){
     
 //设置弹幕随机高度
 function sethigh(){
-        var high=0;
-        high=Math.round(Math.random()*95+18);
-        return high;
+    var div=document.getElementById("main_container");
+    var bullet_high=document.getElementById("main_container").lastElementChild.previousSibling.previousSibling.clientHeight;
+    var div_high=div.clientHeight;
+    // console.log(div_high);
+    div_high=(div_high-bullet_high)+30;
+    var high=0;
+    high=Math.round(Math.random()*div_high+20);
+    // console.log("--------high:"+high);
+    return high;
     }
 
 //插入弹幕
@@ -323,12 +335,22 @@ function say_a_word(user,str){
 }
 //服务器发回的评论和弹幕
 function others_words(user,str,time){
-    $("#comments").append("<div class='comment'>"+
-    "<img class='imghead'  id='"+user+"' src='img/icon_sample.png'>"
+    $("#comments").append("<div class='comment' id='comment["+user+"/"+time+"]'"+">"+ //div需要id
+    "<img class='imghead'  "+"' src='img/icon_sample.png'>"
     +"<div class='username'>"+user+"</div>" //用户名
     +"<div class='time'>"+time+"</div>" //时间
     +"<div class='text'>"+str //评论内容
     +"</div></div>");
+    var commentname="comment["+user+"/"+time+"]'";
+    dele_the_same(commentname);
+}
+function dele_the_same(id){
+    var lastcomment=document.getElementById("main_container").lastElementChild.previousSibling.previousSibling;//最后一个弹幕
+    var yours=document.getElementById(id);
+    var rest=lastcomment.isEqualNode(yours);
+    if(rest){
+        yours.parentNode.removeChild(yours);
+    }
 }
 
 //按钮设置
