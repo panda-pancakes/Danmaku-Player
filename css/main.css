@@ -28,7 +28,7 @@ body{
 #bottom{
     width: -webkit-fill-available;
     padding: 0px;
-    position: absolute;
+    /* position: absolute; */
 }
 #main_container{
     background-color: #545353;
