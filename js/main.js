@@ -1,13 +1,14 @@
-$(function () {
-    var data;
-    var now = new Date();
-    var timestamp = Math.round(now.getTime() / 1000); //unix时间戳
-    date = now.getFullYear() + "/" + now.getMonth() + "/" + now.getDay() + "/" + now.getHours() + ":" + now.getMinutes();
-    var num = 0;
-    var clicktime = 3;
-    var users = Array();
-    var dates = Array();
-    var comments = Array();
+$(function(){
+    var data; 
+    var now=new Date();
+    var timestamp=Math.round(now.getTime()/1000);//unix时间戳
+    date=now.getFullYear()+"/"+now.getMonth()+"/"+now.getDay()+"/"+now.getHours()+":"+now.getMinutes();
+    var num=0;
+    var clicktime = 3; 
+    var users=Array();
+    var dates=Array();
+    var comments=Array();
+    var buble=new Array();
     $("#attention_box").hide();
     var offset = new Array(); //接收传回来的弹幕对应视频时间
     var ws_url = "ws://server.sforest.in:20480";
@@ -28,80 +29,44 @@ $(function () {
                 ws.send(JSON.stringify(package));
             }
         }
-        ws.onmessage = function (evt) {
-            data = evt.data;
-            data = JSON.parse(data);
-            //data=data['data'].toString();
-            data = data.data;
-            console.log(data);
-            var user = new Array();
-            var comments = new Array();
-            var dates = new Array();
-            var offset = new Array();
-            console.log(data);
-            data.sort(function (a, b) {
-                return a.offset > b.offset ? 1 : -1;
-            });
-            console.log(data);
-            // for(var i = 0; i <data.length; i++){
-            //     user[i] = data[i].user;
-            //     comments[i] = data[i].comment;
-            //     dates[i] = data[i].time;
-            //     offset[i] = data[i].offset;
-            // }
-            // if(data=data.replace("[","")!=null){
-            //     data=data.replace("[","");
-            // }
-            // if(data=data.replace("]","")!=null){
-            //     data=data.replace("]","");
-            // }
-            // data=data.replace("/","");
-            // data=data.replace(/\"/g,"");
-            // data=data.replace("{","");
+        ws.onmessage = function(evt) {
+            data = evt.data; 
+            data=JSON.parse(data);
+            console.log("data:======="+data);
+            data=data.data;
             // data=JSON.stringify(data);
             // data=JSON.parse(data);
-            // data=data.split("{");
-            // //data=data.sort();
-            // // console.log("data:======="+data);
-            // // console.log(data.length);
-            // for(var i=1;i<data.length;i++){// data[0]的顺序是错的 好奇怪 为什么
-            //     data[i]=data[i].replace("},","");
-            //     var rest=new Array();
-            //     rest=data[i].split(",");
-            //     // rest=JSON.stringify(rest);
-            //     // rest=JSON.parse(rest);
-            //     // console.log("============"+rest[2]);
-            //     rest=rest.sort();
-            //     if(rest[2].replace("user:","")!=null){
-            //         users[i]=rest[2].replace("user:","");
-            //     }else{
-            //         users[i]=rest[2].replace("user:","失去姓名的用户");
-            //     }
-            //     if(rest[0].replace("comment:","")!=null){
-            //         comments[i]=rest[0].replace("comment:","");
-            //     }else{
-            //         comments[i]=rest[0].replace("comment:","nothing");
-            //     }
-            //     dates[i]=rest[1].replace("time:","");
-            //     dates[i]=new Date(dates[i]*1000).toString();
-            //     dates[i]=dates[i].replace("GMT+0800 (中国标准时间)","");
-            //     var commentname="comment["+users[i]+"/"+dates[i]+"]'";
-            //     // if(clicktime==2){
-            //         others_words(users[i],comments[i],dates[i]);
-            //         dele_the_same(commentname);
-            // }
-            // clicktime=3;逻辑错了 不管怎样 先放出
-            // console.log(i+"======="+users[i]+"say:====="+comments[i]);
-            //}
+            // data.sort();
+            console.log(data);
+            console.log(data[0]);
+            console.log(data.length);
+            for(var i=0;i<data.length;i++){// data[0]的顺序是错的 好奇怪 为什么
+                // data[i]=data[i].replace("},","");
+                offset[i]=data[i].offset;
+                dates[i]=data[i].time;
+                users[i]=data[i].user;
+                comments[i]=data[i].comment;
+                // dates[i]=rest[1].replace("time:","");
+                dates[i]=new Date(dates[i]*1000).toString();
+                // dates[i]=dates[i].replace("GMT+0800 (中国标准时间)","");
+                var commentname="comment["+users[i]+"/"+dates[i]+"]'";
+                // if(clicktime==2){
+                    others_words(users[i],comments[i],dates[i]);
+                    dele_the_same(commentname);
+                // }
+                // clicktime=3;逻辑错了 不管怎样 先放出
+                // console.log(i+"======="+users[i]+"say:====="+comments[i]);
+            }
+            console.log(users[1]);
             // var i=Math.round(Math.random()*100);
             var i = 0;
-            var n = users.length;
-            for (i; i < n; i++) {
-                if (users[i] != undefined) {
+            var n=users.length;
+            for(i;i<n;i++){
+                // if(which_first(offset[i])){   
+                        go_bullet(comments[i],"all");
+                // }else{
 
-                    go_bullet(comments[i], "all");
-
-                }
+                // }
             }
         }
 
@@ -268,91 +233,73 @@ $(function () {
         return high;
     }
 
-    //插入弹幕
-    function go_bullet(text, method) {
-        if (method == "you") {
-            var user = $("#user").val();
-            if (user == undefined || user == "") {
-                user = "一位不愿意透露姓名的用户";
-            }
-            num = num++;
-            containername = "container[" + num + "]";
-            bulletname = "bulletc[" + num + "]";
-            say_a_word(user, text);
-            console.log("写进评论");
-            var colorname = $("#color").val();
-            var sizename = $("#size").val();
-            var opacityname = $("#opacity").val();
-            // font_style(bulletname);
-            // $(containername).css({
-            //     "top":sethigh(),
-            // })
-            // highs[num]=sethigh();
-            // if((highs[num]-highs[random_style()])<=20){
-            //     highs[num]=sethigh()+50;
-            // }
-            $("#main_container").append("<div class='danmaku_container' id=" + containername + " style=" + "top:" + sethigh() + "px>" +
-                "<div class='bullet'" + "id='" + bulletname + "'style=" + "color:" + colorname + ";size:" + sizename + ";opacity:" + opacityname + ";" +
-                "margin:20px;" + ">" + text + "</div>" +
-                "</div>"); //包含在内
-        } else if (method == "all") {
-            if (user == undefined || user == "") {
-                user = "一位不愿意透露姓名的用户";
-            }
-            num = num++;
-            containername = "container[" + num + "]";
-            bulletname = "bulletc[" + num + "]";
-            var color = Array();
-            var display = Array();
-            var size = Array();
-
-            function setstyle() {
-                color[0] = "red";
-                color[1] = "yellow";
-                color[2] = "green";
-                color[3] = "blue";
-                color[4] = "purple";
-                color[5] = "white";
-                display[0] = "1";
-                display[1] = "0.8";
-                display[2] = "0.7";
-                display[3] = "0.5";
-                display[4] = "0.4";
-                display[5] = "0.6";
-                size[0] = "10px";
-                size[1] = "75px";
-                size[2] = "30px";
-                size[3] = "25px";
-                size[4] = "40px";
-                size[5] = "15px";
-            }
-            setstyle();
-            colorname = color[random_style()];
-            opacityname = display[random_style()];
-            sizename = size[random_style()];
-            $("#main_container").append("<div class='danmaku_container' id=" + containername + " style=" + "top:" + sethigh() + "px>" +
-                "<div class='bullet'" + "id='" + bulletname + "'style=" + "color:" + colorname + ";size:" + sizename + ";opacity:" + opacityname + ";" +
-                "margin:20px;" + ">" + text + "</div>" +
-                "</div>"); //包含在内
+//先排序offset再根据顺序调用go_bullet
+function which_first(a){
+    var allmessage=new Array();
+    var num=users.length;
+    for(var i=0;i<num;i++){
+        allmessage[i]=users[i]+"/"+comments[i];
+    }
+    for(var i=0;i<num;i++){
+        a=offset[i]-a;
+        if(a<0){// i要比现在这个查的弹幕大 现在的往前放
+            return true;//可以发弹幕 如果false就待会再调用这个直到
+        }else{
+            return false;
         }
     }
-
-    function random_style() {
-        var i = Math.random() * 6;
-        return i;
-    }
-    //插入弹幕时发表评论
-    function say_a_word(user, str) {
-        $("#comments").append("<div class='comment'>" +
-            "<img class='imghead'  id='" + user + "' src='img/icon_sample.png'>" +
-            "<div class='username'>" + user + "</div>" //用户名
-            +
-            "<div class='time'>" + date + "</div>" //时间
-            +
-            "<div class='text'>" + str //评论内容
-            +
-            "</div></div>");
-    }
+}
+//插入弹幕
+function go_bullet(text,method) {
+    if(method=="you"){
+    var user = $("#user").val(); 
+    num=num++;
+    containername = "container[" + num + "]";
+    bulletname = "bulletc[" + num + "]";
+    say_a_word(user,text);
+    console.log("写进评论");
+    var colorname = $("#color").val();
+    var sizename = $("#size").val();
+    var opacityname = $("#opacity").val();
+    // font_style(bulletname);
+    // $(containername).css({
+    //     "top":sethigh(),
+    // })
+    // highs[num]=sethigh();
+    // if((highs[num]-highs[random_style()])<=20){
+    //     highs[num]=sethigh()+50;
+    // }
+    $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
+    +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+colorname+";size:"+sizename+";opacity:"+opacityname+";"
+    +"margin:20px;"+">" + text +"</div>"
+    +"</div>");//包含在内
+}else if(method=="all"){
+    num=num++;
+    containername = "container[" + num + "]";
+    bulletname = "bulletc[" + num + "]";
+    var color=Array();
+    var display=Array();
+    var size=Array();
+    function setstyle(){
+        color[0]="red";
+        color[1]="yellow";         
+        color[2]="green";
+        color[3]="blue";
+        color[4]="purple";
+        color[5]="white";
+        display[0]="1";
+        display[1]="0.8";
+        display[2]="0.7";
+        display[3]="0.5";
+        display[4]="0.4";
+        display[5]="0.6";
+        size[0]="10px";
+        size[1]="75px";
+        size[2]="30px";
+        size[3]="25px";
+        size[4]="40px";
+        size[5]="15px";
+    }}}
     //服务器发回的评论和弹幕
     function others_words(user, str, time) {
         $("#comments").append("<div class='comment' id='comment[" + user + "/" + time + "]'" + ">" + //div需要id
