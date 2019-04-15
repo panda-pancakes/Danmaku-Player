@@ -8,6 +8,7 @@ $(function(){
     var users=Array();
     var dates=Array();
     var comments=Array();
+    var buble=new Array();
     $("#attention_box").hide();
     var offset=new Array();//接收传回来的弹幕对应视频时间
     var ws_url="ws://server.sforest.in:20480";
@@ -31,44 +32,23 @@ $(function(){
         ws.onmessage = function(evt) {
             data = evt.data; 
             data=JSON.parse(data);
-            data=data['data'].toString();
-            // if(data=data.replace("[","")!=null){
-            //     data=data.replace("[","");
-            // }
-            // if(data=data.replace("]","")!=null){
-            //     data=data.replace("]","");
-            // }
-            data=data.replace("/","");
-            data=data.replace(/\"/g,"");
-            data=data.replace("{","");
-            data=JSON.stringify(data);
-            data=JSON.parse(data);
-            data=data.split("{");
-            data=data.sort();
+            console.log("data:======="+data);
+            data=data.data;
+            // data=JSON.stringify(data);
+            // data=JSON.parse(data);
+            // data.sort();
             console.log(data);
-            // console.log("data:======="+data);
-            // console.log(data.length);
-            for(var i=1;i<data.length;i++){// data[0]的顺序是错的 好奇怪 为什么
-                data[i]=data[i].replace("},","");
-                var rest=new Array();
-                rest=data[i].split(",");
-                // rest=JSON.stringify(rest);
-                // rest=JSON.parse(rest);
-                // console.log("============"+rest[2]);
-                rest=rest.sort();
-                if(rest[2].replace("user:","")!=null){
-                    users[i]=rest[2].replace("user:","");
-                }else{
-                    users[i]=rest[2].replace("user:","失去姓名的用户");
-                }
-                if(rest[0].replace("comment:","")!=null){
-                    comments[i]=rest[0].replace("comment:","");
-                }else{
-                    comments[i]=rest[0].replace("comment:","nothing");
-                }
-                dates[i]=rest[1].replace("time:","");
+            console.log(data[0]);
+            console.log(data.length);
+            for(var i=0;i<data.length;i++){// data[0]的顺序是错的 好奇怪 为什么
+                // data[i]=data[i].replace("},","");
+                offset[i]=data[i].offset;
+                dates[i]=data[i].time;
+                users[i]=data[i].user;
+                comments[i]=data[i].comment;
+                // dates[i]=rest[1].replace("time:","");
                 dates[i]=new Date(dates[i]*1000).toString();
-                dates[i]=dates[i].replace("GMT+0800 (中国标准时间)","");
+                // dates[i]=dates[i].replace("GMT+0800 (中国标准时间)","");
                 var commentname="comment["+users[i]+"/"+dates[i]+"]'";
                 // if(clicktime==2){
                     others_words(users[i],comments[i],dates[i]);
@@ -82,11 +62,11 @@ $(function(){
             var i = 0;
             var n=users.length;
             for(i;i<n;i++){
-                if(users[i]!=undefined){
-                   
+                // if(which_first(offset[i])){   
                         go_bullet(comments[i],"all");
-                  
-                }
+                // }else{
+
+                // }
             }
         }
 
@@ -253,13 +233,26 @@ function sethigh(){
     return high;
     }
 
+//先排序offset再根据顺序调用go_bullet
+function which_first(a){
+    var allmessage=new Array();
+    var num=users.length;
+    for(var i=0;i<num;i++){
+        allmessage[i]=users[i]+"/"+comments[i];
+    }
+    for(var i=0;i<num;i++){
+        a=offset[i]-a;
+        if(a<0){// i要比现在这个查的弹幕大 现在的往前放
+            return true;//可以发弹幕 如果false就待会再调用这个直到
+        }else{
+            return false;
+        }
+    }
+}
 //插入弹幕
 function go_bullet(text,method) {
     if(method=="you"){
     var user = $("#user").val(); 
-    if(user==undefined||user==""){
-        user="一位不愿意透露姓名的用户";
-    }
     num=num++;
     containername = "container[" + num + "]";
     bulletname = "bulletc[" + num + "]";
@@ -281,9 +274,6 @@ function go_bullet(text,method) {
     +"margin:20px;"+">" + text +"</div>"
     +"</div>");//包含在内
 }else if(method=="all"){
-    if(user==undefined||user==""){
-        user="一位不愿意透露姓名的用户";
-    }
     num=num++;
     containername = "container[" + num + "]";
     bulletname = "bulletc[" + num + "]";
