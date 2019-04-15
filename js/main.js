@@ -9,6 +9,7 @@ $(function(){
     var dates=Array();
     var comments=Array();
     $("#attention_box").hide();
+    var offset=new Array();//接收传回来的弹幕对应视频时间
     var ws_url="ws://server.sforest.in:20480";
     player_onoff(); 
     //弹幕开关
@@ -16,9 +17,9 @@ $(function(){
 
     //加载弹幕  用于刷新按钮
     function showall(){
+        var ws = new WebSocket(ws_url);
         $("#attention_box").text("正在载入……");
         attention();
-        var ws = new WebSocket(ws_url);
         if($("#words")!=""){
         ws.onopen = function() {
             var package =  {
@@ -30,7 +31,6 @@ $(function(){
         ws.onmessage = function(evt) {
             data = evt.data; 
             data=JSON.parse(data);
-            //console.log(data.data);
             data=data['data'].toString();
             // if(data=data.replace("[","")!=null){
             //     data=data.replace("[","");
@@ -45,6 +45,7 @@ $(function(){
             data=JSON.parse(data);
             data=data.split("{");
             data=data.sort();
+            console.log(data);
             // console.log("data:======="+data);
             // console.log(data.length);
             for(var i=1;i<data.length;i++){// data[0]的顺序是错的 好奇怪 为什么
@@ -96,6 +97,7 @@ $(function(){
         // },5000*3);
     }
     function loading() {
+        var offset=Math.round(Math.random()*70);//视频时间
         var user = $("#user").val(); 
         var words = $("#words").val();
         var isok =  check();
@@ -108,6 +110,7 @@ $(function(){
                     "comment":words,
                     "time":timestamp,
                     "user":user,
+                    "offset":offset
                 }
                 $("#words").val("");
                 console.log("package:"+user+":"+words+";"+timestamp+";");
@@ -165,11 +168,6 @@ $(function(){
         $(str).css( {
             "margin-bottom":"200px"
         }); 
-        // setTimeout(function(){
-        //     $(str).css({
-        //         "margin-bottom":"inherit"
-        //     });
-        //     },5000);
     }
     //显示提示
     function attention(msg) {
