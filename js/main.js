@@ -82,7 +82,9 @@ $(function(){
             var n=users.length;
             for(i;i<n;i++){
                 if(users[i]!=undefined){
-                    go_bullet(comments[i],"all");
+                   
+                        go_bullet(comments[i],"all");
+                  
                 }
             }
         }

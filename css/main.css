@@ -26,8 +26,9 @@ body{
     top: 0%;
 }
 #bottom{
-    /* background-color: whitesmoke; */
     width: -webkit-fill-available;
+    padding: 0px;
+    position: absolute;
 }
 #main_container{
     background-color: #545353;
