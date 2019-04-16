@@ -50,16 +50,18 @@ $(function () {
             }
             console.log(users[1]);
             // var i=Math.round(Math.random()*100);
-            var i = 0;
-            var n = users.length; 
-            $("#video").bind('timeupdate', function () {
-                console.log('timeupdate', this.currentTime);
-                for (var i = 0; i < n; i++) {
-                    if(this.currentTime == offset[i]){
-                        go_bullet(comments[i], "all");
+            var n = users.length;
+            function update(){
+                $("#video").bind('timeupdate', function () {
+                    console.log('timeupdate', video.currentTime);
+                    for (var i = 0; i < n; i++) {
+                        if(this.currentTime == offset[i]){
+                            go_bullet(comments[i], "all");
+                        }
                     }
-                }
-            });
+                });
+            } 
+            setInterval(update,1000);
             console.log(video.currentTime);
         }
 
