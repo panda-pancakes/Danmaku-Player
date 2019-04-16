@@ -334,6 +334,11 @@ $(function () {
     $("#send_btn").bind("click", function () {
         loading();
     })
+    $(document).keyup(function(event){
+        if(event.keyCode ==13){
+          $("#send_btn").trigger("click");
+        }
+    })
     $("#freshen_btn").click(function () {
         if (clicktime = 3) {
             clicktime = 2
