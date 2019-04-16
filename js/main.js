@@ -52,10 +52,15 @@ $(function () {
             // var i=Math.round(Math.random()*100);
             var i = 0;
             var n = users.length; 
+            $("#video").bind('timeupdate', function () {
+                console.log('timeupdate', this.currentTime);
+                for (var i = 0; i < n; i++) {
+                    if(this.currentTime == offset[i]){
+                        go_bullet(comments[i], "all");
+                    }
+                }
+            });
             console.log(video.currentTime);
-            for (var i = 0; i < n; i++) {
-                go_bullet(comments[i], "all");
-            }
         }
 
         //收集服务器上的弹幕
