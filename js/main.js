@@ -62,10 +62,9 @@ $(function(){
             var i = 0;
             var n=users.length;
             for(i;i<n;i++){
-                // if(which_first(offset[i])){   
+                if(which_first(offset[i])){   
                         go_bullet(comments[i],"all");
-                // }else{
-
+                }
                 // }
             }
         }
@@ -234,21 +233,21 @@ $(function(){
     }
 
 //先排序offset再根据顺序调用go_bullet
-function which_first(a){
-    var allmessage=new Array();
-    var num=users.length;
-    for(var i=0;i<num;i++){
-        allmessage[i]=users[i]+"/"+comments[i];
-    }
-    for(var i=0;i<num;i++){
-        a=offset[i]-a;
-        if(a<0){// i要比现在这个查的弹幕大 现在的往前放
-            return true;//可以发弹幕 如果false就待会再调用这个直到
-        }else{
-            return false;
-        }
-    }
-}
+// function which_first(a){
+//     var allmessage=new Array();
+//     var num=users.length;
+//     for(var i=0;i<num;i++){
+//         allmessage[i]=users[i]+"/"+comments[i];
+//     }
+//     for(var i=0;i<num;i++){
+//         a=offset[i]-a;
+//         if(a<0){// i要比现在这个查的弹幕大 现在的往前放
+//             return true;//可以发弹幕 如果false就待会再调用这个直到
+//         }else{
+//             return false;
+//         }
+//     }
+// }
 //插入弹幕
 function go_bullet(text,method) {
     if(method=="you"){
