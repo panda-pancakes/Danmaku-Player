@@ -44,6 +44,7 @@ $(function () {
                 users[i] = data[i].user;
                 comments[i] = data[i].comment;
                 dates[i] = new Date(dates[i] * 1000).toString();
+                console.log(comments[i]);
                 var commentname = "comment[" + users[i] + "/" + dates[i] + "]'";
                 others_words(users[i], comments[i], dates[i]);
                 dele_the_same(commentname);
