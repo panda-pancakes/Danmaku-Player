@@ -50,6 +50,7 @@ $(function () {
             }
             console.log(users[1]);
             // var i=Math.round(Math.random()*100);
+<<<<<<< HEAD
             var i = 0;
 <<<<<<< HEAD
             var n=users.length;
@@ -66,9 +67,20 @@ $(function () {
                 for (var i = 0; i < n; i++) {
                     if(this.currentTime == offset[i]){
                         go_bullet(comments[i], "all");
+=======
+            var n = users.length;
+            function update(){
+                $("#video").bind('timeupdate', function () {
+                    console.log('timeupdate', video.currentTime);
+                    for (var i = 0; i < n; i++) {
+                        if(this.currentTime == offset[i]){
+                            go_bullet(comments[i], "all");
+                        }
+>>>>>>> 06df6cf754a239bab2ff4244c0059a91cb69ef50
                     }
-                }
-            });
+                });
+            } 
+            setInterval(update,1000);
             console.log(video.currentTime);
 >>>>>>> 3c2903f1a41a57c390101e9048ff2ceb5495f453
         }
