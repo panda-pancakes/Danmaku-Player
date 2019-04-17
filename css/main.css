@@ -145,6 +145,7 @@ input[type="checkbox"]{
     margin: 0px;
     padding-left: 15px;
     padding-bottom: 12px;
+    padding-top: 6px;
 }
 #textbox{
     padding-bottom: 12px;

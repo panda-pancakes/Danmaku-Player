@@ -50,39 +50,19 @@ $(function () {
             }
             console.log(users[1]);
             // var i=Math.round(Math.random()*100);
-<<<<<<< HEAD
             var i = 0;
-<<<<<<< HEAD
-            var n=users.length;
-            for(i;i<n;i++){
-                if(which_first(offset[i])){   
-                        go_bullet(comments[i],"all");
-                }
-                // }
-            }
-=======
             var n = users.length; 
             $("#video").bind('timeupdate', function () {
                 console.log('timeupdate', this.currentTime);
-                for (var i = 0; i < n; i++) {
-                    if(this.currentTime == offset[i]){
-                        go_bullet(comments[i], "all");
-=======
-            var n = users.length;
-            function update(){
-                $("#video").bind('timeupdate', function () {
-                    console.log('timeupdate', video.currentTime);
-                    for (var i = 0; i < n; i++) {
-                        if(this.currentTime == offset[i]){
-                            go_bullet(comments[i], "all");
-                        }
->>>>>>> 06df6cf754a239bab2ff4244c0059a91cb69ef50
-                    }
-                });
-            } 
-            setInterval(update,1000);
+                // for (var i = 0; i < n; i++) {
+                //     if(this.currentTime == offset[i]){
+                //         go_bullet(comments[i], "all");
+                //     }
+                // }
+                test(this.currentTime);
+            });//哦因为视频没播放 这个绑定了也好像用不到？
+            test();
             console.log(video.currentTime);
->>>>>>> 3c2903f1a41a57c390101e9048ff2ceb5495f453
         }
 
         //收集服务器上的弹幕
@@ -91,6 +71,21 @@ $(function () {
         //         console.log("关闭ws"); 
         //     }    
         // },5000*3);
+    }
+
+    function test(){//用于测试弹幕真实情况 
+        var i=0;
+        console.log("开始测试");
+        console.log(users.length);
+        console.log(comments.length);
+        do {
+            setTimeout(function(){
+                go_bullet(comments[i],"all");
+                console.log("发送了一条啦~");
+            },1233*3);
+            i++;    
+        }
+        while(i<users.length);
     }
 
     function loading() {
@@ -244,80 +239,11 @@ $(function () {
         // console.log(div_high);
         div_high = (div_high - bullet_high) + 30;
         var high = 0;
-        high = Math.round(Math.random() * div_high + 20);
+        high = Math.round(div_high + Math.random()*20);
         // console.log("--------high:"+high);
         return high;
     }
 
-<<<<<<< HEAD
-//先排序offset再根据顺序调用go_bullet
-// function which_first(a){
-//     var allmessage=new Array();
-//     var num=users.length;
-//     for(var i=0;i<num;i++){
-//         allmessage[i]=users[i]+"/"+comments[i];
-//     }
-//     for(var i=0;i<num;i++){
-//         a=offset[i]-a;
-//         if(a<0){// i要比现在这个查的弹幕大 现在的往前放
-//             return true;//可以发弹幕 如果false就待会再调用这个直到
-//         }else{
-//             return false;
-//         }
-//     }
-// }
-//插入弹幕
-function go_bullet(text,method) {
-    if(method=="you"){
-    var user = $("#user").val(); 
-    num=num++;
-    containername = "container[" + num + "]";
-    bulletname = "bulletc[" + num + "]";
-    say_a_word(user,text);
-    console.log("写进评论");
-    var colorname = $("#color").val();
-    var sizename = $("#size").val();
-    var opacityname = $("#opacity").val();
-    // font_style(bulletname);
-    // $(containername).css({
-    //     "top":sethigh(),
-    // })
-    // highs[num]=sethigh();
-    // if((highs[num]-highs[random_style()])<=20){
-    //     highs[num]=sethigh()+50;
-    // }
-    $("#main_container").append("<div class='danmaku_container' id="+containername+" style="+"top:"+sethigh()+"px>"
-    +"<div class='bullet'" + "id='" +bulletname + "'style="+"color:"+colorname+";size:"+sizename+";opacity:"+opacityname+";"
-    +"margin:20px;"+">" + text +"</div>"
-    +"</div>");//包含在内
-}else if(method=="all"){
-    num=num++;
-    containername = "container[" + num + "]";
-    bulletname = "bulletc[" + num + "]";
-    var color=Array();
-    var display=Array();
-    var size=Array();
-    function setstyle(){
-        color[0]="red";
-        color[1]="yellow";         
-        color[2]="green";
-        color[3]="blue";
-        color[4]="purple";
-        color[5]="white";
-        display[0]="1";
-        display[1]="0.8";
-        display[2]="0.7";
-        display[3]="0.5";
-        display[4]="0.4";
-        display[5]="0.6";
-        size[0]="10px";
-        size[1]="75px";
-        size[2]="30px";
-        size[3]="25px";
-        size[4]="40px";
-        size[5]="15px";
-    }}}
-=======
     //先排序offset再根据顺序调用go_bullet
     function which_first(a) {
         var allmessage = new Array();
@@ -392,7 +318,6 @@ function go_bullet(text,method) {
                 "</div>");
         }
     }
->>>>>>> 3c2903f1a41a57c390101e9048ff2ceb5495f453
     //服务器发回的评论和弹幕
     function others_words(user, str, time) {
         $("#comments").append("<div class='comment' id='comment[" + user + "/" + time + "]'" + ">" + //div需要id
