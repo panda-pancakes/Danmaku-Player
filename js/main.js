@@ -36,9 +36,9 @@ $(function () {
             data = data.data;
             data.sort(function (a, b) {
                 return a.offset > b.offset ? 1 : -1;
-                });
+            });
             console.log(data);
-            for (var i = 0; i < data.length; i++) { 
+            for (var i = 0; i < data.length; i++) {
                 offset[i] = data[i].offset;
                 dates[i] = data[i].time;
                 users[i] = data[i].user;
@@ -52,7 +52,7 @@ $(function () {
             console.log(users[1]);
             // var i=Math.round(Math.random()*100);
             var i = 0;
-            var n = users.length; 
+            var n = users.length;
             $("#video").bind('timeupdate', function () {
                 console.log('timeupdate', this.currentTime);
                 // for (var i = 0; i < n; i++) {
@@ -61,7 +61,7 @@ $(function () {
                 //     }
                 // }
                 test(this.currentTime);
-            });//哦因为视频没播放 这个绑定了也好像用不到？
+            }); //哦因为视频没播放 这个绑定了也好像用不到？
             test();
             console.log(video.currentTime);
         }
@@ -74,19 +74,15 @@ $(function () {
         // },5000*3);
     }
 
-    function test(){//用于测试弹幕真实情况 
-        var i=0;
-        console.log("开始测试");
-        console.log(users.length);
-        console.log(comments.length);
-        do {
-            setTimeout(function(){
-                go_bullet(comments[i],"all");
-                console.log("发送了一条啦~");
-            },1233*3);
-            i++;    
+    function test() { //用于测试弹幕真实情况 
+        for (var i=0; i<comments.length; i++) { 
+            setTimeout( (function(i) {
+                return function() {
+                    go_bullet(comments[i], "all");
+                    console.log("发送了" + i + "条啦~");
+                }
+            })(i), i*3000 );
         }
-        while(i<users.length);
     }
 
     function loading() {
@@ -240,7 +236,7 @@ $(function () {
         // console.log(div_high);
         div_high = (div_high - bullet_high) + 30;
         var high = 0;
-        high = Math.round(div_high + Math.random()*20);
+        high = Math.round(div_high + Math.random() * 20);
         // console.log("--------high:"+high);
         return high;
     }
@@ -357,9 +353,9 @@ $(function () {
     $("#send_btn").bind("click", function () {
         loading();
     })
-    $(document).keyup(function(event){
-        if(event.keyCode ==13){
-          $("#send_btn").trigger("click");
+    $(document).keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#send_btn").trigger("click");
         }
     })
     $("#freshen_btn").click(function () {
