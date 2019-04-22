@@ -53,15 +53,22 @@ $(function () {
             // var i=Math.round(Math.random()*100);
             var i = 0;
             var n = users.length;
-            $("#video").bind('timeupdate', function () {
-                console.log('timeupdate', this.currentTime);
-                // for (var i = 0; i < n; i++) {
-                //     if(this.currentTime == offset[i]){
-                //         go_bullet(comments[i], "all");
-                //     }
-                // }
-                test(this.currentTime);
-            }); //哦因为视频没播放 这个绑定了也好像用不到？
+            // $("#video").bind('timeupdate', function () {
+            //     console.log('timeupdate', this.currentTime);
+            //     // for (var i = 0; i < n; i++) {
+            //     //     if(this.currentTime == offset[i]){
+            //     //         go_bullet(comments[i], "all");
+            //     //     }
+            //     // }
+            //     do{
+            //         if(this.currentTime == offset[i]){
+            //             go_bullet(comments[i], "all");
+            //             i++;
+            //         }
+            //     }while(i < n)
+                
+            //     //test(this.currentTime);
+            // }); //哦因为视频没播放 这个绑定了也好像用不到？
             test();
             console.log(video.currentTime);
         }
